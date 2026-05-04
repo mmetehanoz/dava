@@ -66,7 +66,7 @@ export default function QuickDonationBar() {
         {quickAmounts.map(a => (
           <button
             key={a}
-            onClick={() => { setAmount(a); setCustomAmount(''); }}
+            onClick={() => { setAmount(a); setCustomAmount(String(a)); }}
             className={`flex-1 min-w-[70px] py-2 rounded-xl text-sm font-bold transition-all ${
               amount === a && !customAmount
                 ? 'bg-emerald-600 text-white shadow-md'
@@ -84,7 +84,7 @@ export default function QuickDonationBar() {
           type="number"
           placeholder="Özel tutar giriniz (₺)"
           value={customAmount}
-          onChange={e => { setCustomAmount(e.target.value); setAmount(0); }}
+          onChange={e => { setCustomAmount(e.target.value); setAmount(Number(e.target.value)); }}
           className="w-full border-2 border-gray-200 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors"
         />
         <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">₺</span>
