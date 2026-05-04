@@ -80,10 +80,10 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-emerald-900 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-emerald-400">
-          <p>© 2024 Değer ve Ahlak Vakfı. Tüm hakları saklıdır.</p>
+          <p>© 2026 Değer ve Ahlak Vakfı. Tüm hakları saklıdır.</p>
           <p className="flex items-center gap-1.5">
             <Heart className="w-3.5 h-3.5 text-emerald-500" />
-            Sevgiyle geliştirildi
+            <a href="https://babilyazilim.com" target="_blank" rel="noopener noreferrer" className="hover:text-emerald-300 transition-colors">Babil Yazılım</a> tarafından geliştirildi
           </p>
         </div>
       </div>
