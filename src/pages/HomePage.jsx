@@ -79,6 +79,7 @@ export default function HomePage() {
                   percent={constructionItem.progressPercent}
                   collected={constructionItem.collectedAmount}
                   target={constructionItem.targetAmount}
+                  dark
                 />
                 <div className="grid grid-cols-3 gap-2 mt-4 text-center">
                   <div>
