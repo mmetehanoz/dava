@@ -3,6 +3,7 @@ import { CartProvider } from './context/CartContext';
 import Navbar from './components/layout/Navbar';
 import MobileBottomNav from './components/layout/MobileBottomNav';
 import Footer from './components/layout/Footer';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 import HomePage from './pages/HomePage';
 import DonationPage from './pages/DonationPage';
@@ -34,6 +35,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <CartProvider>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Layout><HomePage /></Layout>} />
           <Route path="/bagis" element={<Layout><DonationPage /></Layout>} />
