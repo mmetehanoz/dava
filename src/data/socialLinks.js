@@ -1,0 +1,26 @@
+export const socialLinks = [
+  {
+    id: 1,
+    platform: "YouTube",
+    handle: "@davavakfi",
+    description: "Hafızlık mezuniyet törenleri, faaliyet videoları ve eğitim içeriklerimiz YouTube kanalımızda.",
+    url: "https://youtube.com/@davavakfi",
+    color: "from-red-500 to-red-600",
+    bgLight: "bg-red-50",
+    textColor: "text-red-600",
+    icon: "youtube",
+    stats: "1.2K Abone",
+  },
+  {
+    id: 2,
+    platform: "Instagram",
+    handle: "@davavakfi",
+    description: "Günlük paylaşımlar, öğrenci anları ve vakıf haberlerimiz için Instagram'ı takip edin.",
+    url: "https://instagram.com/davavakfi",
+    color: "from-purple-500 to-pink-500",
+    bgLight: "bg-purple-50",
+    textColor: "text-purple-600",
+    icon: "instagram",
+    stats: "3.4K Takipçi",
+  },
+];
