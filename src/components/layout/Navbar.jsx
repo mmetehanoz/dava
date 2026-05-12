@@ -31,7 +31,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-          <img src="/dava/dava-logo.png" alt="DAVA Logo" className="h-10 w-auto object-contain" />
+          <img src="/dava/dava-logo.png" alt="DAVA Logo" className="h-14 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}
