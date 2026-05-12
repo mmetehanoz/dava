@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { ShoppingCart, Menu, X, BookOpen } from 'lucide-react';
+import { ShoppingCart, Menu, X } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import Badge from '../ui/Badge';
 
@@ -31,13 +31,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 flex-shrink-0">
-          <div className="w-9 h-9 bg-emerald-600 rounded-xl flex items-center justify-center shadow-md">
-            <BookOpen className="w-5 h-5 text-white" />
-          </div>
-          <div className="leading-tight">
-            <span className="text-emerald-700 font-bold text-sm block">DAVA</span>
-            <span className="text-gray-500 text-xs hidden sm:block">Değer ve Ahlak Vakfı</span>
-          </div>
+          <img src="/dava/dava-logo.png" alt="DAVA Logo" className="h-10 w-auto object-contain" />
         </Link>
 
         {/* Desktop Nav */}

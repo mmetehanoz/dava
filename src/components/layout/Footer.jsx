@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Heart, Mail, Phone, MapPin } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -9,13 +9,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center">
-                <BookOpen className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <div className="text-white font-bold">DAVA</div>
-                <div className="text-emerald-400 text-xs">Değer ve Ahlak Vakfı</div>
-              </div>
+              <img src="/dava/dava-logo.png" alt="DAVA Logo" className="h-12 w-auto object-contain brightness-0 invert" />
             </div>
             <p className="text-emerald-300 text-sm leading-relaxed">
               Nesiller boyu sürecek değerleri aktarmak için hafızlık, Kur'an eğitimi ve yardım faaliyetleriyle çalışıyoruz.
