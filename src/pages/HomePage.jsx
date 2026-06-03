@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, GraduationCap, BookOpen, Heart, Users } from 'lucide-react';
+import { ArrowRight, GraduationCap, BookOpen, Heart, Users, MapPin } from 'lucide-react';
+import { institutions } from '../data/institutions';
 import HomeSlider from '../components/home/HomeSlider';
 import QuickDonationBar from '../components/home/QuickDonationBar';
 import StatsSection from '../components/home/StatsSection';
@@ -179,6 +180,34 @@ export default function HomePage() {
           >
             Aileler İçin Detaylı Bilgi <ArrowRight className="w-4 h-4" />
           </Link>
+        </div>
+      </section>
+
+      {/* Institutions */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Kurumlarımız</h2>
+            <p className="text-gray-500 text-sm mt-1">Vakfımız bünyesindeki eğitim kurumlarımız.</p>
+          </div>
+          <Link to="/kurumlarimiz" className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-sm">
+            Tümü <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {institutions.map(inst => (
+            <Link
+              key={inst.id}
+              to={`/kurumlarimiz/${inst.slug}`}
+              className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 p-5 flex flex-col items-center text-center group"
+            >
+              <div className="w-14 h-14 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform shadow-md">
+                {inst.emoji}
+              </div>
+              <h4 className="font-bold text-gray-900 text-xs leading-snug mb-1">{inst.name}</h4>
+              <span className="text-xs text-emerald-600 font-medium">{inst.category}</span>
+            </Link>
+          ))}
         </div>
       </section>
 

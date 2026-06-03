@@ -19,6 +19,8 @@ import ActivityDetailPage from './pages/ActivityDetailPage';
 import AboutPage from './pages/AboutPage';
 import ForFamiliesPage from './pages/ForFamiliesPage';
 import ContactPage from './pages/ContactPage';
+import InstitutionsPage from './pages/InstitutionsPage';
+import InstitutionDetailPage from './pages/InstitutionDetailPage';
 
 function Layout({ children }) {
   return (
@@ -51,6 +53,8 @@ export default function App() {
           <Route path="/hakkimizda" element={<Layout><AboutPage /></Layout>} />
           <Route path="/aileler-icin" element={<Layout><ForFamiliesPage /></Layout>} />
           <Route path="/iletisim" element={<Layout><ContactPage /></Layout>} />
+          <Route path="/kurumlarimiz" element={<Layout><InstitutionsPage /></Layout>} />
+          <Route path="/kurumlarimiz/:slug" element={<Layout><InstitutionDetailPage /></Layout>} />
         </Routes>
       </CartProvider>
     </BrowserRouter>

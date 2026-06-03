@@ -7,6 +7,7 @@ import Badge from '../ui/Badge';
 const navLinks = [
   { to: '/', label: 'Ana Sayfa' },
   { to: '/bagis', label: 'Bağış Yap' },
+  { to: '/kurumlarimiz', label: 'Kurumlarımız' },
   { to: '/hafiz-sahiplen', label: 'Hafız Sahiplen' },
   { to: '/faaliyetler', label: 'Faaliyetler' },
   { to: '/hakkimizda', label: 'Hakkımızda' },
