@@ -11,7 +11,6 @@ export default function QuickDonationBar() {
   const [category, setCategory] = useState('Genel Bağış');
   const [amount, setAmount] = useState(250);
   const [customAmount, setCustomAmount] = useState('');
-  const [frequency, setFrequency] = useState('once');
   const { addItem } = useCart();
   const navigate = useNavigate();
 
@@ -33,7 +32,7 @@ export default function QuickDonationBar() {
       priceType: 'custom',
       amount: finalAmount,
       quantity: 1,
-      isMonthly: frequency === 'monthly',
+      isMonthly: false,
     });
 
     navigate('/sepet');
@@ -88,22 +87,6 @@ export default function QuickDonationBar() {
           className="w-full border-2 border-gray-200 focus:border-emerald-500 rounded-xl px-4 py-2.5 text-sm outline-none transition-colors"
         />
         <span className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 text-sm font-medium">₺</span>
-      </div>
-
-      {/* Frequency */}
-      <div className="flex rounded-xl overflow-hidden border-2 border-gray-200 mb-4">
-        <button
-          onClick={() => setFrequency('once')}
-          className={`flex-1 py-2 text-sm font-semibold transition-colors ${frequency === 'once' ? 'bg-emerald-600 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-        >
-          Tek Seferlik
-        </button>
-        <button
-          onClick={() => setFrequency('monthly')}
-          className={`flex-1 py-2 text-sm font-semibold transition-colors ${frequency === 'monthly' ? 'bg-emerald-600 text-white' : 'text-gray-600 hover:bg-gray-50'}`}
-        >
-          Aylık
-        </button>
       </div>
 
       <button
