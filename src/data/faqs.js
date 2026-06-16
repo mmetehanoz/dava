@@ -1,32 +1,47 @@
 export const faqs = [
   {
     id: 1,
-    question: "Bağışlarım güvende mi?",
-    answer: "Değer ve Ahlak Vakfı resmi bir vakıftır ve tüm bağışlar yasal güvence altındadır. Her bağış için makbuz düzenlenir, yıllık faaliyet raporlarımız şeffaf bir şekilde yayımlanır.",
+    question: "Değer ve Ahlak Vakfı'nın temel amacı nedir?",
+    answer: "Vakfımız; milli, manevi, ahlaki ve toplumsal değerleri güçlendirmeyi, gençlerin ve ailelerin gelişimine katkı sunmayı amaçlamaktadır. Eğitim, sosyal yardım ve kültürel projeler yürütür.",
   },
   {
     id: 2,
-    question: "Hafız bursumu nasıl takip edebilirim?",
-    answer: "Hafız bursu bağışçılarımız, destekledikleri öğrencinin eğitim sürecini düzenli gönderilen raporlar ve videolar aracılığıyla takip edebilir. Bağış sonrası iletişim bilgilerinize bilgilendirme yapılır.",
+    question: "Vakıf hangi alanlarda hizmet veriyor?",
+    answer: "Eğitim bursları, gençlik çalışmaları, aile ve değerler eğitimi, kültür–ilim projeleri, sosyal yardımlar ve ibadethane–külliye destekleri başlıca çalışma alanlarımızdır.",
   },
   {
     id: 3,
-    question: "Çocuğum hem normal okula devam eder mi hem de hafızlık yapar mı?",
-    answer: "Evet. Vakfımızın eğitim modeli, öğrencilerin devlet okulundaki eğitimlerini aksatmadan hafızlık eğitimi alabilecekleri şekilde tasarlanmıştır. Sabah, öğleden sonra ve hafta sonu programları mevcuttur.",
+    question: "Bağışlar nerede kullanılıyor?",
+    answer: "Yapılan bağışlar; eğitim, gençlik projeleri, ihtiyaç sahiplerine yardım, kültürel çalışmalar ve vakfın yürüttüğü kalıcı hizmetlerde değerlendirilmektedir. Tüm süreç şeffaftır.",
   },
   {
     id: 4,
-    question: "Kurban bağışımın ulaştığını nasıl bilirim?",
-    answer: "Kurban dağıtımları video ve fotoğraf kaydı altında yapılır. Her bağışçıya kurban kesim ve dağıtım belgesi WhatsApp veya e-posta üzerinden iletilir.",
+    question: "Düzenli bağış yapabilir miyim?",
+    answer: "Evet. Aylık düzenli bağış talimatı verebilir, banka veya online ödeme yöntemleri ile otomatik bağış oluşturabilirsiniz.",
   },
   {
     id: 5,
-    question: "Aylık bağış yapabilir miyim?",
-    answer: "Evet. Hafız bursu için aylık bağış seçeneği mevcuttur. Belirli bir öğrenciye düzenli destek olmak için bizimle iletişime geçebilirsiniz.",
+    question: "Bağışlar vergiden düşülebilir mi?",
+    answer: "Mevzuata göre uygun olan bağışlar vergiden düşülebilir. Bunun için bağış makbuzunuz yeterlidir. Kesin bilgi için mali danışmanınıza başvurabilirsiniz.",
   },
   {
     id: 6,
-    question: "Zekatımı vakfınıza verebilir miyim?",
-    answer: "Evet. Vakfımız zekât kabul etmektedir. Zekatınızın doğru hesaplanması ve uygun kişilere ulaştırılması konusunda yardımcı olmaktan memnuniyet duyarız.",
+    question: "Burs başvurusu nasıl yapılır?",
+    answer: "Web sitemizde belirlenen dönemlerde yayınlanan burs başvuru formunu doldurarak başvuru yapabilirsiniz. Başvurular başarı, ihtiyaç durumu ve uygunluk kriterlerine göre değerlendirilir.",
+  },
+  {
+    id: 7,
+    question: "Gönüllü olabilir miyim?",
+    answer: "Elbette. Gönüllülerimiz projelerimizin en önemli parçasıdır. \"Gönüllü Ol\" formunu doldurarak hangi alanlarda görev almak istediğinizi iletebilirsiniz.",
+  },
+  {
+    id: 8,
+    question: "Vakfın faaliyetlerini nasıl takip edebilirim?",
+    answer: "Web sitemiz, sosyal medya hesaplarımız ve duyurularımız üzerinden tüm çalışmalarımızı düzenli olarak takip edebilirsiniz.",
+  },
+  {
+    id: 9,
+    question: "İletişim için hangi kanalları kullanabilirim?",
+    answer: "İletişim sayfamızdaki telefon, e-posta ve adres bilgilerinden bize ulaşabilirsiniz. Ayrıca iletişim formu üzerinden mesaj bırakabilirsiniz.",
   },
 ];

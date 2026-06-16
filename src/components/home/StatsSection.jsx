@@ -4,7 +4,7 @@ export default function StatsSection({ stats }) {
       <h2 className="text-center text-white font-bold text-xl md:text-2xl mb-8">
         Rakamlarla DAVA
       </h2>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
         {stats.map(stat => (
           <div key={stat.id} className="text-center">
             <div className="text-4xl mb-2">{stat.emoji}</div>
