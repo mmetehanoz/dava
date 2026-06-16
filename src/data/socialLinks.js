@@ -2,9 +2,9 @@ export const socialLinks = [
   {
     id: 1,
     platform: "YouTube",
-    handle: "@davavakfi",
+    handle: "@asmsbrefendi",
     description: "Hafızlık mezuniyet törenleri, faaliyet videoları ve eğitim içeriklerimiz YouTube kanalımızda.",
-    url: "https://youtube.com/@davavakfi",
+    url: "https://www.youtube.com/@asmsbrefendi",
     color: "from-red-500 to-red-600",
     bgLight: "bg-red-50",
     textColor: "text-red-600",
@@ -14,9 +14,9 @@ export const socialLinks = [
   {
     id: 2,
     platform: "Instagram",
-    handle: "@davavakfi",
+    handle: "@asmsbrefnd",
     description: "Günlük paylaşımlar, öğrenci anları ve vakıf haberlerimiz için Instagram'ı takip edin.",
-    url: "https://instagram.com/davavakfi",
+    url: "https://www.instagram.com/asmsbrefnd/",
     color: "from-purple-500 to-pink-500",
     bgLight: "bg-purple-50",
     textColor: "text-purple-600",

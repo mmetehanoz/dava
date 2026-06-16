@@ -116,24 +116,8 @@ export default function HomePage() {
                 <div className="text-center text-5xl mb-4">🏗️</div>
                 <ProgressBar
                   percent={constructionItem.progressPercent}
-                  collected={constructionItem.collectedAmount}
-                  target={constructionItem.targetAmount}
                   dark
                 />
-                <div className="grid grid-cols-3 gap-2 mt-4 text-center">
-                  <div>
-                    <div className="text-amber-300 font-bold text-sm">%{constructionItem.progressPercent}</div>
-                    <div className="text-emerald-300 text-xs">Tamamlandı</div>
-                  </div>
-                  <div>
-                    <div className="text-white font-bold text-sm">1.375K</div>
-                    <div className="text-emerald-300 text-xs">Toplanan</div>
-                  </div>
-                  <div>
-                    <div className="text-white font-bold text-sm">2.500K</div>
-                    <div className="text-emerald-300 text-xs">Hedef</div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

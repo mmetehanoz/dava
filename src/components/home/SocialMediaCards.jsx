@@ -22,7 +22,6 @@ export default function SocialMediaCards({ links }) {
                   <div className={`font-bold text-sm ${link.textColor}`}>{link.platform}</div>
                   <div className="text-gray-500 text-xs">{link.handle}</div>
                 </div>
-                <span className="ml-auto text-xs text-gray-500 bg-white px-2 py-1 rounded-full">{link.stats}</span>
               </div>
               <p className="text-gray-600 text-sm mb-4 leading-relaxed">{link.description}</p>
               <a

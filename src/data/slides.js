@@ -19,14 +19,4 @@ export const slides = [
     bgColor: "from-emerald-800 to-teal-700",
     emoji: "🏗️",
   },
-  {
-    id: 3,
-    title: "Kurban Emanetlerinizi\nGüvenle Ulaştırıyoruz",
-    description: "Türkiye, Bangladeş, Tanzanya ve daha birçok ülkede ihtiyaç sahiplerine kurban etinizi teslim ediyoruz.",
-    cta: "Kurban Bağışı Yap",
-    ctaLink: "/bagis/kurban-bagisi",
-    badge: "Kurban Dönemi",
-    bgColor: "from-amber-800 to-emerald-800",
-    emoji: "🌙",
-  },
 ];
