@@ -59,15 +59,19 @@ export default function Footer() {
             <ul className="space-y-3 text-sm text-emerald-300">
               <li className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 mt-0.5 text-emerald-500 flex-shrink-0" />
-                <span>İstanbul, Türkiye</span>
+                <span>Maltepe Mah. Davutpaşa Cad. No:8/1 Zeytinburnu / İstanbul</span>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <a href="tel:+905001234567" className="hover:text-white transition-colors">+90 500 123 45 67</a>
+                <a href="tel:+902124933434" className="hover:text-white transition-colors">(0212) 493 34 34</a>
+              </li>
+              <li className="flex items-center gap-2">
+                <Phone className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                <a href="tel:+905549095557" className="hover:text-white transition-colors">(0554) 909 55 57</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                <a href="mailto:info@davavakfi.org" className="hover:text-white transition-colors">info@davavakfi.org</a>
+                <a href="mailto:iletisim@degerveahlakvakfi.org" className="hover:text-white transition-colors">iletisim@degerveahlakvakfi.org</a>
               </li>
             </ul>
           </div>

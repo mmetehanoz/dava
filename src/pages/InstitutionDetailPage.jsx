@@ -54,7 +54,9 @@ export default function InstitutionDetailPage() {
             {/* Hakkında */}
             <div className="bg-white rounded-3xl shadow-md p-6 border border-gray-100">
               <h2 className="font-bold text-gray-900 text-lg mb-3">Kurum Hakkında</h2>
-              <p className="text-gray-600 text-sm leading-relaxed">{inst.description}</p>
+              {inst.description.split('\n\n').map((para, i) => (
+                <p key={i} className="text-gray-600 text-sm leading-relaxed mb-3 last:mb-0">{para}</p>
+              ))}
             </div>
 
             {/* Galeri */}

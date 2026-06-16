@@ -38,6 +38,45 @@ export default function HomePage() {
         <QuickDonationBar />
       </div>
 
+      {/* Institutions */}
+      <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Kurumlarımız</h2>
+            <p className="text-gray-500 text-sm mt-1">Vakfımız bünyesindeki eğitim kurumlarımız.</p>
+          </div>
+          <Link to="/kurumlarimiz" className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-sm flex-shrink-0">
+            Tümünü Gör <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {institutions.map(inst => (
+            <Link
+              key={inst.id}
+              to={`/kurumlarimiz/${inst.slug}`}
+              className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex gap-4 p-4 group items-start"
+            >
+              {/* Görsel / emoji */}
+              <div className="w-16 h-16 flex-shrink-0 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center shadow-md">
+                {inst.image
+                  ? <img src={inst.image} alt={inst.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                  : <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{inst.emoji}</span>
+                }
+              </div>
+              {/* İçerik */}
+              <div className="flex-1 min-w-0">
+                <span className="text-xs font-semibold text-emerald-600 mb-0.5 block">{inst.category}</span>
+                <h4 className="font-bold text-gray-900 text-sm leading-snug mb-1">{inst.name}</h4>
+                <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{inst.shortDesc}</p>
+                <span className="inline-flex items-center gap-1 text-emerald-600 text-xs font-semibold mt-2 group-hover:gap-2 transition-all">
+                  İncele <ArrowRight className="w-3 h-3" />
+                </span>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Featured Donations */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">
         <div className="flex items-center justify-between mb-6">
@@ -180,34 +219,6 @@ export default function HomePage() {
           >
             Aileler İçin Detaylı Bilgi <ArrowRight className="w-4 h-4" />
           </Link>
-        </div>
-      </section>
-
-      {/* Institutions */}
-      <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Kurumlarımız</h2>
-            <p className="text-gray-500 text-sm mt-1">Vakfımız bünyesindeki eğitim kurumlarımız.</p>
-          </div>
-          <Link to="/kurumlarimiz" className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-sm">
-            Tümü <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          {institutions.map(inst => (
-            <Link
-              key={inst.id}
-              to={`/kurumlarimiz/${inst.slug}`}
-              className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 p-5 flex flex-col items-center text-center group"
-            >
-              <div className="w-14 h-14 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform shadow-md">
-                {inst.emoji}
-              </div>
-              <h4 className="font-bold text-gray-900 text-xs leading-snug mb-1">{inst.name}</h4>
-              <span className="text-xs text-emerald-600 font-medium">{inst.category}</span>
-            </Link>
-          ))}
         </div>
       </section>
 

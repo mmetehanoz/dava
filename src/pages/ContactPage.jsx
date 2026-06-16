@@ -31,10 +31,10 @@ export default function ContactPage() {
           {/* Contact Info */}
           <div className="md:col-span-2 flex flex-col gap-4">
             {[
-              { Icon: Phone, title: 'Telefon', value: '+90 500 123 45 67', href: 'tel:+905001234567', color: 'bg-emerald-50 text-emerald-600' },
-              { Icon: Mail, title: 'E-posta', value: 'info@davavakfi.org', href: 'mailto:info@davavakfi.org', color: 'bg-blue-50 text-blue-600' },
-              { Icon: MapPin, title: 'Adres', value: 'İstanbul, Türkiye', href: null, color: 'bg-amber-50 text-amber-600' },
-              { Icon: Clock, title: 'Çalışma Saatleri', value: 'Pzt-Cmt: 09:00 - 18:00', href: null, color: 'bg-purple-50 text-purple-600' },
+              { Icon: MapPin, title: 'Adres', value: 'Maltepe Mah. Davutpaşa Cad. No:8/1\nZeytinburnu / İstanbul', href: null, color: 'bg-amber-50 text-amber-600' },
+              { Icon: Phone, title: 'Telefon', value: '(0212) 493 34 34', href: 'tel:+902124933434', color: 'bg-emerald-50 text-emerald-600' },
+              { Icon: Phone, title: 'GSM', value: '(0554) 909 55 57', href: 'tel:+905549095557', color: 'bg-teal-50 text-teal-600' },
+              { Icon: Mail, title: 'E-posta', value: 'iletisim@degerveahlakvakfi.org', href: 'mailto:iletisim@degerveahlakvakfi.org', color: 'bg-blue-50 text-blue-600' },
             ].map(({ Icon, title, value, href, color }, i) => (
               <div key={i} className="bg-white rounded-3xl p-5 shadow-md border border-gray-100 flex items-start gap-4">
                 <div className={`w-10 h-10 ${color} rounded-2xl flex items-center justify-center flex-shrink-0`}>
@@ -45,7 +45,7 @@ export default function ContactPage() {
                   {href ? (
                     <a href={href} className="text-gray-500 text-sm hover:text-emerald-600 transition-colors">{value}</a>
                   ) : (
-                    <p className="text-gray-500 text-sm">{value}</p>
+                    <p className="text-gray-500 text-sm whitespace-pre-line">{value}</p>
                   )}
                 </div>
               </div>
