@@ -1,53 +1,52 @@
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
-import ActivityCard from '../components/activity/ActivityCard';
-import { activities } from '../data/activities';
-
-const categories = ['Tümü', 'Tören', 'Yardım', 'İnşaat', 'Etkinlik'];
+import { departments } from '../data/departments';
 
 export default function ActivitiesPage() {
-  const [active, setActive] = useState('Tümü');
-
-  const filtered = active === 'Tümü'
-    ? activities
-    : activities.filter(a => a.category === active);
-
   return (
     <div className="pb-20 lg:pb-0">
       <PageHeader
-        title="Faaliyetler"
-        subtitle="Vakfımızın gerçekleştirdiği etkinlikler, yardım kampanyaları ve eğitim faaliyetleri."
+        title="Faaliyetlerimiz"
+        subtitle="Vakfımızın yürüttüğü çalışma alanları ve hizmet birimleri."
         emoji="📋"
-        breadcrumb="Ana Sayfa / Faaliyetler"
+        breadcrumb="Ana Sayfa / Faaliyetlerimiz"
       />
 
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8">
-        <div className="flex gap-2 overflow-x-auto pb-2 mb-6">
-          {categories.map(cat => (
-            <button
-              key={cat}
-              onClick={() => setActive(cat)}
-              className={`flex-shrink-0 px-4 py-2 rounded-2xl text-sm font-semibold transition-all ${
-                active === cat
-                  ? 'bg-emerald-600 text-white shadow-md'
-                  : 'bg-white text-gray-600 border border-gray-200 hover:border-emerald-300 hover:text-emerald-700'
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filtered.map(a => <ActivityCard key={a.id} activity={a} />)}
-        </div>
-
-        {filtered.length === 0 && (
-          <div className="text-center py-16 text-gray-400">
-            <div className="text-5xl mb-4">📋</div>
-            <p className="font-medium">Bu kategoride faaliyet bulunamadı.</p>
+      <div className="max-w-4xl mx-auto px-4 md:px-6 py-10 flex flex-col gap-5">
+        {departments.map(dept => (
+          <div key={dept.id} className={`bg-white rounded-3xl shadow-md border ${dept.borderColor} overflow-hidden`}>
+            <div className="flex items-center gap-4 p-5 md:p-6">
+              <div className={`w-12 h-12 flex-shrink-0 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center text-2xl shadow-md`}>
+                {dept.emoji}
+              </div>
+              <h3 className={`font-bold text-base md:text-lg text-gray-900`}>{dept.title}</h3>
+            </div>
+            <div className={`${dept.bgLight} mx-4 mb-4 rounded-2xl px-5 py-4`}>
+              {dept.content.split('\n\n').map((para, i) => (
+                <p key={i} className="text-gray-700 text-sm leading-relaxed mb-3 last:mb-0">{para}</p>
+              ))}
+            </div>
           </div>
-        )}
+        ))}
+
+        {/* Gönüllü Olma CTA */}
+        <div className="bg-gradient-to-br from-emerald-900 to-teal-800 rounded-3xl p-7 md:p-10 text-white shadow-xl mt-2">
+          <div className="text-4xl mb-4">🙋‍♂️</div>
+          <h2 className="text-xl md:text-2xl font-bold mb-3">Gönüllü Olmaya Davet</h2>
+          <p className="text-emerald-200 text-sm leading-relaxed mb-3">
+            Bilgi, emek ve zamanını hayırlı bir hizmette değerlendirmek; yürütülen çalışmaların bir parçası olmak isteyen herkesi gönüllü faaliyetlerimize davet ediyoruz. Burada her katkı kıymetlidir ve her emek, ortak bir iyiliğin inşasına dahildir.
+          </p>
+          <p className="text-emerald-200 text-sm leading-relaxed mb-6">
+            Siz de eğitimden gençliğe, sosyal yardımdan kültürel çalışmalara kadar uzanan bu hizmet yolculuğunda yer almak isterseniz, gönüllü olarak aramıza katılabilirsiniz.
+          </p>
+          <Link
+            to="/iletisim"
+            className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-amber-900 font-bold px-6 py-3 rounded-2xl text-sm transition-all hover:shadow-lg active:scale-95"
+          >
+            Gönüllü Ol <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </div>
     </div>
   );

@@ -1,24 +1,23 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight, GraduationCap, BookOpen, Heart, Users, MapPin } from 'lucide-react';
 import { institutions } from '../data/institutions';
+import { departments } from '../data/departments';
 import HomeSlider from '../components/home/HomeSlider';
 import QuickDonationBar from '../components/home/QuickDonationBar';
 import StatsSection from '../components/home/StatsSection';
 import FAQSection from '../components/home/FAQSection';
 import SocialMediaCards from '../components/home/SocialMediaCards';
 import DonationCard from '../components/donation/DonationCard';
-import ActivityCard from '../components/activity/ActivityCard';
 import ProgressBar from '../components/ui/ProgressBar';
 import { slides } from '../data/slides';
 import { donationItems } from '../data/donationItems';
-import { activities } from '../data/activities';
 import { socialLinks } from '../data/socialLinks';
 import { faqs } from '../data/faqs';
 import { stats } from '../data/stats';
 
 const constructionItem = donationItems.find(i => i.slug === 'kuran-kursu-insaat-bagisi');
 const featuredDonations = donationItems.filter(i => i.slug !== 'kuran-kursu-insaat-bagisi').slice(0, 4);
-const featuredActivities = activities.filter(a => a.featured).slice(0, 3);
+const featuredDepartments = departments.slice(0, 4);
 
 const educationFeatures = [
   { icon: BookOpen, title: 'Hafızlık Eğitimi', desc: 'Kur\'an-ı Kerim\'i usulüne göre ezberleme eğitimi', color: 'text-emerald-600 bg-emerald-50' },
@@ -145,15 +144,32 @@ export default function HomePage() {
       <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-2xl font-bold text-gray-900">Son Faaliyetler</h2>
-            <p className="text-gray-500 text-sm mt-1">Vakfımızın güncel çalışmalarından haberdar olun.</p>
+            <h2 className="text-2xl font-bold text-gray-900">Faaliyetlerimiz</h2>
+            <p className="text-gray-500 text-sm mt-1">Vakfımızın yürüttüğü çalışma alanları ve hizmet birimleri.</p>
           </div>
-          <Link to="/faaliyetler" className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-sm">
-            Tümü <ArrowRight className="w-4 h-4" />
+          <Link to="/faaliyetler" className="flex items-center gap-1 text-emerald-600 hover:text-emerald-700 font-semibold text-sm flex-shrink-0">
+            Tümünü Gör <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {featuredActivities.map(a => <ActivityCard key={a.id} activity={a} />)}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {featuredDepartments.map(dept => (
+            <Link
+              key={dept.id}
+              to="/faaliyetler"
+              className={`bg-white rounded-3xl shadow-md border ${dept.borderColor} overflow-hidden hover:shadow-xl transition-all duration-300 group`}
+            >
+              <div className="flex items-center gap-4 p-4 md:p-5">
+                <div className={`w-12 h-12 flex-shrink-0 bg-gradient-to-br ${dept.color} rounded-2xl flex items-center justify-center text-2xl shadow-md group-hover:scale-105 transition-transform`}>
+                  {dept.emoji}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h4 className="font-bold text-gray-900 text-sm leading-snug mb-1">{dept.title}</h4>
+                  <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{dept.content.split('\n\n')[0]}</p>
+                </div>
+                <ArrowRight className="w-4 h-4 text-gray-300 flex-shrink-0 group-hover:text-emerald-500 group-hover:translate-x-0.5 transition-all" />
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
 
