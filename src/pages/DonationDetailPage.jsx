@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ShoppingCart, ArrowLeft } from 'lucide-react';
+import { CheckCircle, ShoppingCart, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { donationItems } from '../data/donationItems';
 import DonationAmountSelector from '../components/donation/DonationAmountSelector';
 import QuantitySelector from '../components/donation/QuantitySelector';
 import IntentNoteField from '../components/donation/IntentNoteField';
+import DonationFrequencyToggle from '../components/donation/DonationFrequencyToggle';
 import ProgressBar from '../components/ui/ProgressBar';
 import Badge from '../components/ui/Badge';
 import PageHeader from '../components/ui/PageHeader';
+import { createCartId } from '../utils/cartId';
 
 const fmt = (n) =>
   new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(n);
@@ -24,8 +26,10 @@ export default function DonationDetailPage() {
   const [selectedAmount, setSelectedAmount] = useState(item?.suggestedAmounts?.[0] || 0);
   const [customAmount, setCustomAmount] = useState('');
   const [country, setCountry] = useState(item?.countries?.[0] || '');
+  const [frequency, setFrequency] = useState('once');
   const [intent, setIntent] = useState('');
   const [error, setError] = useState('');
+  const [added, setAdded] = useState(false);
 
   if (!item) {
     return (
@@ -56,7 +60,7 @@ export default function DonationDetailPage() {
     }
 
     addItem({
-      cartId: `${item.id}-${Date.now()}`,
+      cartId: createCartId(item.id),
       id: item.id,
       slug: item.slug,
       title: item.title,
@@ -68,10 +72,11 @@ export default function DonationDetailPage() {
       quantity,
       country: item.countryEnabled ? country : undefined,
       intent: item.intentEnabled ? intent : undefined,
-      isMonthly: false,
+      isMonthly: frequency === 'monthly',
     });
 
-    navigate('/sepet');
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1600);
   };
 
   return (
@@ -155,7 +160,11 @@ export default function DonationDetailPage() {
               onClick={handleAddToCart}
               className="w-full flex items-center justify-center gap-2 py-4 rounded-2xl font-bold text-base transition-all hover:shadow-lg active:scale-95 bg-emerald-600 hover:bg-emerald-700 text-white"
             >
-              <><ShoppingCart className="w-5 h-5" /> Sepete Ekle</>
+              {added ? (
+                <><CheckCircle className="w-5 h-5" /> Sepete Eklendi</>
+              ) : (
+                <><ShoppingCart className="w-5 h-5" /> Sepete Ekle</>
+              )}
 
             </button>
           </div>

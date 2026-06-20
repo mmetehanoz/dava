@@ -1,16 +1,26 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, CheckCircle, Shield } from 'lucide-react';
+import { ArrowLeft, CheckCircle, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { createDonation } from '../services/api';
 import PageHeader from '../components/ui/PageHeader';
+import TurnstileWidget from '../components/security/TurnstileWidget';
 
 const fmt = (n) =>
   new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(n);
 
+const Field = ({ label, id, error, children }) => (
+  <div>
+    <label htmlFor={id} className="block text-sm font-semibold text-gray-700 mb-1.5">{label}</label>
+    {children}
+    {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+  </div>
+);
+
 export default function DonorInfoPage() {
   const { items, totalAmount, clearCart } = useCart();
   const navigate = useNavigate();
+  const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
   const [form, setForm] = useState({
     fullName: '',
@@ -20,13 +30,9 @@ export default function DonorInfoPage() {
     note: '',
     kvkk: false,
   });
+  const [turnstileToken, setTurnstileToken] = useState('');
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-
-  if (items.length === 0) {
-    navigate('/sepet');
-    return null;
-  }
 
   const validate = () => {
     const e = {};
@@ -34,6 +40,7 @@ export default function DonorInfoPage() {
     if (!form.phone.trim()) e.phone = 'Telefon zorunludur.';
     if (!form.email.trim() || !form.email.includes('@')) e.email = 'Geçerli bir e-posta girin.';
     if (!form.kvkk) e.kvkk = 'KVKK onayı zorunludur.';
+    if (turnstileSiteKey && !turnstileToken) e.turnstile = 'Güvenlik doğrulamasını tamamlayın.';
     return e;
   };
 
@@ -43,7 +50,7 @@ export default function DonorInfoPage() {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     try {
-      const result = await createDonation({ donor: form, items, totalAmount });
+      const result = await createDonation({ donor: form, items, totalAmount, turnstileToken });
       if (result.success) {
         clearCart();
         navigate('/bagis-basarili', { state: { donationId: result.donationId, donor: form, totalAmount } });
@@ -60,16 +67,27 @@ export default function DonorInfoPage() {
     setErrors(e => ({ ...e, [key]: undefined }));
   };
 
-  const Field = ({ label, id, error, children }) => (
-    <div>
-      <label htmlFor={id} className="block text-sm font-semibold text-gray-700 mb-1.5">{label}</label>
-      {children}
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
-    </div>
-  );
+  const handleTurnstileVerify = useCallback((token) => {
+    setTurnstileToken(token);
+    setErrors(e => ({ ...e, turnstile: undefined }));
+  }, []);
+
+  const resetTurnstile = useCallback(() => {
+    setTurnstileToken('');
+  }, []);
+
+  const handleTurnstileError = useCallback(() => {
+    setTurnstileToken('');
+    setErrors(e => ({ ...e, turnstile: 'Güvenlik doğrulaması tamamlanamadı.' }));
+  }, []);
 
   const inputClass = (key) =>
     `w-full border-2 ${errors[key] ? 'border-red-300' : 'border-gray-200 focus:border-emerald-500'} rounded-2xl px-4 py-3 text-sm outline-none transition-colors`;
+
+  if (items.length === 0) {
+    navigate('/sepet');
+    return null;
+  }
 
   return (
     <div className="pb-20 lg:pb-0">
@@ -134,6 +152,14 @@ export default function DonorInfoPage() {
             {errors.general && (
               <p className="text-red-500 text-sm bg-red-50 rounded-xl px-4 py-2">{errors.general}</p>
             )}
+
+            <TurnstileWidget
+              siteKey={turnstileSiteKey}
+              onVerify={handleTurnstileVerify}
+              onExpire={resetTurnstile}
+              onError={handleTurnstileError}
+              error={errors.turnstile}
+            />
 
             <button
               type="submit"

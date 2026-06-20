@@ -55,7 +55,7 @@ export const getStats = async () => {
 
 export const createDonation = async (payload) => {
   await delay(800);
-  // TODO: POST /api/donations/
+  // TODO: POST /api/donations/ and verify payload.turnstileToken on the server with the Turnstile secret key.
   console.log('Donation payload:', payload);
   return {
     success: true,

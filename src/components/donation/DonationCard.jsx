@@ -1,20 +1,20 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
+import { CheckCircle, ShoppingCart } from 'lucide-react';
 import ProgressBar from '../ui/ProgressBar';
 import Badge from '../ui/Badge';
 import { useCart } from '../../context/CartContext';
+import { createCartId } from '../../utils/cartId';
 
 const fmt = (n) =>
   new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(n);
 
 export default function DonationCard({ item }) {
   const { addItem } = useCart();
-  const navigate = useNavigate();
 
   const [selectedAmount, setSelectedAmount] = useState(item.suggestedAmounts?.[0] || item.fixedPrice || 0);
   const [customAmount, setCustomAmount] = useState('');
   const [error, setError] = useState('');
+  const [added, setAdded] = useState(false);
 
   const finalAmount = item.priceType === 'fixed'
     ? item.fixedPrice
@@ -31,7 +31,7 @@ export default function DonationCard({ item }) {
     }
 
     addItem({
-      cartId: `${item.id}-${Date.now()}`,
+      cartId: createCartId(item.id),
       id: item.id,
       slug: item.slug,
       title: item.title,
@@ -44,7 +44,8 @@ export default function DonationCard({ item }) {
       isMonthly: false,
     });
 
-    navigate('/sepet');
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1600);
   };
 
   return (
@@ -109,7 +110,11 @@ export default function DonationCard({ item }) {
           onClick={handleAdd}
           className="mt-auto w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white text-xs font-bold py-3 rounded-2xl flex items-center justify-center gap-1.5 transition-all hover:shadow-md"
         >
-          <ShoppingCart className="w-3.5 h-3.5" /> Sepete Ekle
+          {added ? (
+            <><CheckCircle className="w-3.5 h-3.5" /> Sepete Eklendi</>
+          ) : (
+            <><ShoppingCart className="w-3.5 h-3.5" /> Sepete Ekle</>
+          )}
         </button>
       </div>
     </div>

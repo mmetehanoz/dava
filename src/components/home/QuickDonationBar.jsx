@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { ShoppingCart } from 'lucide-react';
+import { CheckCircle, ShoppingCart } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 import { donationCategories } from '../../data/donationCategories';
 import { donationItems } from '../../data/donationItems';
+import { createCartId } from '../../utils/cartId';
 
 const quickAmounts = [100, 250, 500, 1000];
 
@@ -11,8 +11,8 @@ export default function QuickDonationBar() {
   const [category, setCategory] = useState('Genel Bağış');
   const [amount, setAmount] = useState(250);
   const [customAmount, setCustomAmount] = useState('');
+  const [added, setAdded] = useState(false);
   const { addItem } = useCart();
-  const navigate = useNavigate();
 
   const filteredCategories = donationCategories.filter(c => c.id !== 'all');
 
@@ -21,7 +21,7 @@ export default function QuickDonationBar() {
     if (!finalAmount || finalAmount < 1) return;
 
     const matchedItem = donationItems.find(i => i.category === category);
-    const cartId = `quick-${category}-${Date.now()}`;
+    const cartId = createCartId(`quick-${category}`);
 
     addItem({
       cartId,
@@ -35,7 +35,8 @@ export default function QuickDonationBar() {
       isMonthly: false,
     });
 
-    navigate('/sepet');
+    setAdded(true);
+    window.setTimeout(() => setAdded(false), 1600);
   };
 
   return (
@@ -93,8 +94,11 @@ export default function QuickDonationBar() {
         onClick={handleAdd}
         className="w-full bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white py-3 rounded-xl font-bold text-sm flex items-center justify-center gap-2 transition-all shadow-md hover:shadow-lg"
       >
-        <ShoppingCart className="w-4 h-4" />
-        Sepete Ekle
+        {added ? (
+          <><CheckCircle className="w-4 h-4" /> Sepete Eklendi</>
+        ) : (
+          <><ShoppingCart className="w-4 h-4" /> Sepete Ekle</>
+        )}
       </button>
     </div>
   );
