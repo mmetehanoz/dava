@@ -1,3 +1,5 @@
+import { assetPath } from '../utils/assetPath';
+
 export const institutions = [
   {
     id: 1,
@@ -52,21 +54,21 @@ Ravza 4-6 Yaş Anaokulu olarak; "Geleceğin güçlü nesilleri, küçük yaşta 
 Çocuklarımızın dünyasına hem modern eğitimin dinamizmini hem de inancımızın güzelliklerini harmanlayarak dokunuyor, ailelerimizle birlikte onların yarınlarını inşa ediyoruz.`,
     category: "Anaokulu",
     emoji: "🌸",
-    image: "/dava/kurumlar/ravza-anaokulu/ravza-01.jpeg",
+    image: assetPath("kurumlar/ravza-anaokulu/ravza-01.jpeg"),
     gallery: [
-      "/dava/kurumlar/ravza-anaokulu/ravza-01.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-02.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-03.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-04.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-05.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-07.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-08.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-09.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-010.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-011.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-012.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-014.jpeg",
-      "/dava/kurumlar/ravza-anaokulu/ravza-015.jpeg",
+      assetPath("kurumlar/ravza-anaokulu/ravza-01.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-02.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-03.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-04.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-05.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-07.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-08.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-09.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-010.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-011.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-012.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-014.jpeg"),
+      assetPath("kurumlar/ravza-anaokulu/ravza-015.jpeg"),
     ],
     features: [
       "Oyun tabanlı öğrenme",

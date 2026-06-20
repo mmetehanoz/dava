@@ -1,8 +1,10 @@
+import { assetPath } from '../utils/assetPath';
+
 export const donationItems = [
   {
     id: 1,
     slug: "hafiz-bursu",
-    image: "/dava/bagislar/hafiz-bursu.webp",
+    image: assetPath("bagislar/hafiz-bursu.webp"),
     title: "Hafız Bursu",
     category: "Hafızlık",
     description: "Bir hafız öğrencinin eğitim yolculuğuna destek olun. Aylık burs katkınızla bir çocuğun Kur'an eğitimi tamamlanır.",
@@ -20,7 +22,7 @@ export const donationItems = [
   {
     id: 2,
     slug: "kurban-bagisi",
-    image: "/dava/bagislar/kurban-bagisi.webp",
+    image: assetPath("bagislar/kurban-bagisi.webp"),
     title: "Kurban Bağışı",
     category: "Kurban",
     description: "Kurban emanetlerinizi ihtiyaç sahiplerine ulaştıralım. Türkiye ve dünya genelinde dağıtım yapılmaktadır.",
@@ -39,7 +41,7 @@ export const donationItems = [
   {
     id: 3,
     slug: "sadaka-bagisi",
-    image: "/dava/bagislar/sadaka-bagisi.webp",
+    image: assetPath("bagislar/sadaka-bagisi.webp"),
     title: "Sadaka Bağışı",
     category: "Genel Bağış",
     description: "Sadakanız ihtiyaç sahiplerine umut olsun. Dilediğiniz tutarda sadaka bağışı yapabilirsiniz.",
@@ -58,7 +60,7 @@ export const donationItems = [
   {
     id: 4,
     slug: "zekat-bagisi",
-    image: "/dava/bagislar/zekat-bagisi.webp",
+    image: assetPath("bagislar/zekat-bagisi.webp"),
     title: "Zekat Bağışı",
     category: "Genel Bağış",
     description: "Zekât emanetlerinizi güvenle ihtiyaç sahiplerine ulaştırıyoruz. Hesaplamanızı yapıp kolayca bağış yapın.",
@@ -77,7 +79,7 @@ export const donationItems = [
   {
     id: 5,
     slug: "kuran-kursu-insaat-bagisi",
-    image: "/dava/bagislar/kuran-kursu-insaati.webp",
+    image: assetPath("bagislar/kuran-kursu-insaati.webp"),
     title: "Kur'an Kursu İnşaat Bağışı",
     category: "Kur'an Kursu",
     description: "Bir Kur'an kursunun inşasına tuğla tuğla destek olun. Her katkınız nesiller boyu hayır akacak bir esere dönüşür.",
