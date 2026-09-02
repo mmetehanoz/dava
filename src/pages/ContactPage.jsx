@@ -23,7 +23,13 @@ export default function ContactPage() {
     }).catch((err) => {
       // show error briefly
       console.error('Contact submit error', err);
-      alert((err && err.body && err.body.message) || 'Mesaj gönderilemedi');
+      const detail = err && err.body && err.body.errors;
+      if (detail) {
+        const first = Array.isArray(detail) ? detail.join(', ') : Object.entries(detail).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join('; ');
+        alert(first || (err.body.message) || 'Mesaj gönderilemedi');
+      } else {
+        alert((err && err.body && err.body.message) || 'Mesaj gönderilemedi');
+      }
     });
   };
 
