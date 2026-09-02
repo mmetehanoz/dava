@@ -12,7 +12,7 @@ function CartItem({ item, onRemove, onQuantityChange }) {
 
   return (
     <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-4 md:p-5">
-      <div className="flex items-start gap-4">
+            <div className="flex items-start gap-4">
         <div className="w-14 h-14 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center text-2xl flex-shrink-0">
           {item.emoji || '🤲'}
         </div>
@@ -25,19 +25,19 @@ function CartItem({ item, onRemove, onQuantityChange }) {
               {item.isMonthly && <p className="text-xs text-amber-600 mt-0.5">🔄 Aylık bağış</p>}
               {item.intent && <p className="text-xs text-gray-400 mt-0.5 italic">"{item.intent}"</p>}
             </div>
-            <button
-              onClick={() => onRemove(item.cartId)}
-              className="text-gray-300 hover:text-red-500 transition-colors p-1 flex-shrink-0"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
+                    <button
+                      onClick={() => onRemove()}
+                      className="text-gray-300 hover:text-red-500 transition-colors p-1 flex-shrink-0"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
           </div>
 
-          <div className="flex items-center justify-between mt-3">
+              <div className="flex items-center justify-between mt-3">
             {item.quantityEnabled !== false && item.priceType === 'fixed' ? (
               <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-1">
                 <button
-                  onClick={() => onQuantityChange(item.cartId, (item.quantity || 1) - 1)}
+                  onClick={() => onQuantityChange((item.quantity || 1) - 1)}
                   disabled={(item.quantity || 1) <= 1}
                   className="w-7 h-7 rounded-lg bg-white shadow-sm hover:bg-emerald-50 disabled:opacity-40 flex items-center justify-center transition-colors"
                 >
@@ -45,7 +45,7 @@ function CartItem({ item, onRemove, onQuantityChange }) {
                 </button>
                 <span className="w-8 text-center font-bold text-sm">{item.quantity || 1}</span>
                 <button
-                  onClick={() => onQuantityChange(item.cartId, (item.quantity || 1) + 1)}
+                  onClick={() => onQuantityChange((item.quantity || 1) + 1)}
                   className="w-7 h-7 rounded-lg bg-white shadow-sm hover:bg-emerald-50 flex items-center justify-center transition-colors"
                 >
                   <Plus className="w-3 h-3" />
@@ -112,14 +112,17 @@ export default function CartPage() {
                 Sepeti Temizle
               </button>
             </div>
-            {items.map(item => (
-              <CartItem
-                key={item.cartId}
-                item={item}
-                onRemove={removeItem}
-                onQuantityChange={updateQuantity}
-              />
-            ))}
+            {items.map((item, idx) => {
+              const id = item.cartId || item.id || item.cart_item_id || item.cartItemId || idx;
+              return (
+                <CartItem
+                  key={id}
+                  item={item}
+                  onRemove={() => removeItem(id)}
+                  onQuantityChange={(qty) => updateQuantity(id, qty)}
+                />
+              );
+            })}
           </div>
 
           {/* Summary */}
@@ -128,10 +131,11 @@ export default function CartPage() {
               <h3 className="font-bold text-gray-900 mb-4">Özet</h3>
 
               <div className="flex flex-col gap-2 mb-4">
-                {items.map(item => {
+                {items.map((item, idx) => {
                   const price = item.priceType === 'fixed' ? item.fixedPrice : item.amount;
+                  const sid = item.cartId || item.id || item.cart_item_id || item.cartItemId || idx;
                   return (
-                    <div key={item.cartId} className="flex justify-between text-sm">
+                    <div key={sid} className="flex justify-between text-sm">
                       <span className="text-gray-500 truncate pr-2">{item.title}</span>
                       <span className="font-medium flex-shrink-0">
                         {fmt(price * (item.quantity || 1))}

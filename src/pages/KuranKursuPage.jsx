@@ -2,10 +2,19 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 import ProgressBar from '../components/ui/ProgressBar';
-import { donationItems } from '../data/donationItems';
+import { useEffect, useState } from 'react';
+import { getDonationItems } from '../services/api';
 
 export default function KuranKursuPage() {
-  const item = donationItems.find(i => i.slug === 'kuran-kursu-insaat-bagisi');
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    getDonationItems()
+      .then(items => { if (active) setItem(items.find(i => i.slug === 'kuran-kursu-insaat-bagisi') || null); })
+      .catch(() => { if (active) setItem(null); });
+    return () => { active = false; };
+  }, []);
 
   return (
     <div className="pb-20 lg:pb-0">

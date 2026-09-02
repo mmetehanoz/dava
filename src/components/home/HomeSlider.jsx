@@ -23,18 +23,18 @@ export default function HomeSlider({ slides }) {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      <div className={`bg-gradient-to-br ${slide.bgColor} min-h-[320px] md:min-h-[400px] flex items-center`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-12 w-full grid md:grid-cols-2 gap-8 items-center">
+      <div className={`bg-gradient-to-br ${slide.bgColor} min-h-[380px] md:min-h-[480px] flex items-center`}>
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-16 w-full grid md:grid-cols-2 gap-8 items-center">
           <div className="text-white">
             {slide.badge && (
               <span className="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 backdrop-blur-sm">
                 ✨ {slide.badge}
               </span>
             )}
-            <h2 className="text-3xl md:text-4xl font-bold leading-tight mb-4" style={{ whiteSpace: 'pre-line' }}>
+            <h2 className="text-3xl md:text-5xl font-bold leading-tight mb-4" style={{ whiteSpace: 'pre-line' }}>
               {slide.title}
             </h2>
-            <p className="text-white/80 text-sm md:text-base mb-6 max-w-md leading-relaxed">
+            <p className="text-white/80 text-sm md:text-lg mb-6 max-w-md leading-relaxed">
               {slide.description}
             </p>
             <Link

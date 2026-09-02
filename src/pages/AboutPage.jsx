@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { X, FileText, ScrollText } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
+import faaliyetBelgesiPdf from '../assets/docs/faaliyet-belgesi.pdf';
 
 const vakifSenediArticles = [
   {
@@ -376,6 +377,23 @@ export default function AboutPage() {
           <FileText className="w-5 h-5 text-gray-300 group-hover:text-emerald-500 transition-colors flex-shrink-0" />
         </button>
 
+        {/* Faaliyet Belgesi */}
+        <a
+          href={faaliyetBelgesiPdf}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full bg-white rounded-3xl shadow-md border border-gray-100 p-5 flex items-center gap-4 hover:shadow-xl hover:border-emerald-200 transition-all duration-300 group text-left"
+        >
+          <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
+            <FileText className="w-6 h-6 text-white" />
+          </div>
+          <div className="flex-1">
+            <div className="font-bold text-gray-900 text-sm mb-0.5">Faaliyet Belgesi</div>
+            <div className="text-gray-500 text-xs">Vakfımızın faaliyet belgesini görüntülemek için tıklayın.</div>
+          </div>
+          <FileText className="w-5 h-5 text-gray-300 group-hover:text-amber-500 transition-colors flex-shrink-0" />
+        </a>
+
         {/* Yönetim Kurulu & Mütevelli Heyeti */}
         <div className="grid md:grid-cols-2 gap-5">
           <section className="bg-white rounded-3xl shadow-md p-6 border border-gray-100">
@@ -533,13 +551,14 @@ export default function AboutPage() {
           <div className="flex flex-col gap-3">
             {[
               { currency: "TL", flag: "🇹🇷", iban: "TR20 0020 9000 0227 2150 0000 01", color: "border-emerald-200 bg-emerald-50", badge: "bg-emerald-600 text-white" },
-              { currency: "USD", flag: "🇺🇸", iban: "TR09 0020 9000 0227 2150 0000 05", color: "border-blue-200 bg-blue-50", badge: "bg-blue-600 text-white" },
               { currency: "EURO", flag: "🇪🇺", iban: "TR79 0020 9000 0227 2150 0000 06", color: "border-amber-200 bg-amber-50", badge: "bg-amber-600 text-white" },
+              { currency: "USD", flag: "🇺🇸", iban: "TR09 0020 9000 0227 2150 0000 05", color: "border-blue-200 bg-blue-50", badge: "bg-blue-600 text-white" },
             ].map((acc, i) => (
               <div key={i} className={`rounded-2xl border p-4 ${acc.color} flex items-center gap-4`}>
                 <div className={`flex-shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold ${acc.badge}`}>{acc.flag} {acc.currency}</div>
                 <div className="flex-1 min-w-0">
                   <div className="text-xs text-gray-500 mb-0.5">Ziraat Katılım</div>
+                  <div className="text-sm font-semibold text-gray-800 mb-0.5">DEĞER VE AHLAK VAKFI</div>
                   <div className="font-mono font-semibold text-gray-800 text-sm tracking-wide">{acc.iban}</div>
                 </div>
               </div>

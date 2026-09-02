@@ -1,4 +1,4 @@
-import { HashRouter as BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import Navbar from './components/layout/Navbar';
 import MobileBottomNav from './components/layout/MobileBottomNav';
@@ -11,6 +11,8 @@ import DonationDetailPage from './pages/DonationDetailPage';
 import CartPage from './pages/CartPage';
 import DonorInfoPage from './pages/DonorInfoPage';
 import DonationSuccessPage from './pages/DonationSuccessPage';
+import PaymentSuccessPage from './pages/PaymentSuccessPage';
+import PaymentFailPage from './pages/PaymentFailPage';
 import HafizSahiplenPage from './pages/HafizSahiplenPage';
 import HafizBursuPage from './pages/HafizBursuPage';
 import KuranKursuPage from './pages/KuranKursuPage';
@@ -34,8 +36,11 @@ function Layout({ children }) {
 }
 
 export default function App() {
+  const rawBase = import.meta.env.BASE_URL || '/';
+  const basename = rawBase === '/' ? '' : rawBase.replace(/\/$/, '');
+
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <CartProvider>
         <ScrollToTop />
         <Routes>
@@ -45,6 +50,8 @@ export default function App() {
           <Route path="/sepet" element={<Layout><CartPage /></Layout>} />
           <Route path="/bagisci-bilgileri" element={<Layout><DonorInfoPage /></Layout>} />
           <Route path="/bagis-basarili" element={<Layout><DonationSuccessPage /></Layout>} />
+          <Route path="/odeme/basarili" element={<Layout><PaymentSuccessPage /></Layout>} />
+          <Route path="/odeme/basarisiz" element={<Layout><PaymentFailPage /></Layout>} />
           <Route path="/hafiz-sahiplen" element={<Layout><HafizSahiplenPage /></Layout>} />
           <Route path="/hafiz-bursu" element={<Layout><HafizBursuPage /></Layout>} />
           <Route path="/kuran-kursu-insaati" element={<Layout><KuranKursuPage /></Layout>} />

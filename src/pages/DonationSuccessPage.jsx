@@ -21,16 +21,16 @@ export default function DonationSuccessPage() {
         </div>
 
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">
-          Bağışınız Alındı! 🎉
+          Bağış Talebiniz Alındı! 🎉
         </h1>
         <p className="text-gray-500 text-sm leading-relaxed mb-6">
-          {state.donor?.fullName && `Sayın ${state.donor.fullName},`} bağışınız için teşekkür ederiz.
-          Allah razı olsun. Bağış makbuzunuz e-posta adresinize iletilecektir.
+          {state.donor?.fullName && `Sayın ${state.donor.fullName},`} bağış talebiniz kaydedildi.
+          Ödeme tamamlandıktan sonra makbuzunuz e-posta adresinize iletilecektir.
         </p>
 
         {state.donationId && (
           <div className="bg-emerald-50 rounded-2xl py-3 px-5 mb-6 inline-flex items-center gap-2 text-sm">
-            <span className="text-emerald-600 font-bold">Bağış No:</span>
+            <span className="text-emerald-600 font-bold">Talep No:</span>
             <span className="text-emerald-800 font-mono font-bold">{state.donationId}</span>
           </div>
         )}

@@ -3,20 +3,17 @@ import { ArrowRight, GraduationCap, BookOpen, Heart, Users, MapPin } from 'lucid
 import { institutions } from '../data/institutions';
 import { departments } from '../data/departments';
 import HomeSlider from '../components/home/HomeSlider';
-import QuickDonationBar from '../components/home/QuickDonationBar';
 import StatsSection from '../components/home/StatsSection';
 import FAQSection from '../components/home/FAQSection';
 import SocialMediaCards from '../components/home/SocialMediaCards';
 import DonationCard from '../components/donation/DonationCard';
 import ProgressBar from '../components/ui/ProgressBar';
 import { slides } from '../data/slides';
-import { donationItems } from '../data/donationItems';
+import { getDonationItems } from '../services/api';
 import { socialLinks } from '../data/socialLinks';
 import { faqs } from '../data/faqs';
 import { stats } from '../data/stats';
 
-const constructionItem = donationItems.find(i => i.slug === 'kuran-kursu-insaat-bagisi');
-const featuredDonations = donationItems.filter(i => i.slug !== 'kuran-kursu-insaat-bagisi').slice(0, 4);
 const featuredDepartments = departments.slice(0, 4);
 
 const educationFeatures = [
@@ -26,16 +23,26 @@ const educationFeatures = [
   { icon: Users, title: 'Sosyal Gelişim', desc: 'Etkinlikler, spor ve sosyal beceri programları', color: 'text-purple-600 bg-purple-50' },
 ];
 
+import { useEffect, useState } from 'react';
+
 export default function HomePage() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    getDonationItems()
+      .then(apiItems => { if (active && Array.isArray(apiItems)) setItems(apiItems); })
+      .catch(() => {});
+    return () => { active = false; };
+  }, []);
+
+  const constructionItem = items.find(i => i.slug === 'kuran-kursu-insaat-bagisi');
+  const featuredDonations = items.filter(i => i.slug !== 'kuran-kursu-insaat-bagisi').slice(0, 4);
+
   return (
     <div className="pb-20 lg:pb-0">
       {/* Slider */}
       <HomeSlider slides={slides} />
-
-      {/* Quick Donation Bar */}
-      <div className="max-w-7xl mx-auto">
-        <QuickDonationBar />
-      </div>
 
       {/* Institutions */}
       <section className="max-w-7xl mx-auto px-4 md:px-6 mt-12">

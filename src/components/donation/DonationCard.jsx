@@ -44,6 +44,17 @@ export default function DonationCard({ item }) {
       isMonthly: false,
     });
 
+    // persist metadata for server-hydrated cart augmentation
+    try {
+      const metaJson = localStorage.getItem('dava_donation_meta');
+      const meta = metaJson ? JSON.parse(metaJson) : {};
+      const key = String(item.id || item.slug);
+      meta[key] = { title: item.title, category: item.category, emoji: item.emoji };
+      localStorage.setItem('dava_donation_meta', JSON.stringify(meta));
+    } catch (e) {
+      // ignore
+    }
+
     setAdded(true);
     window.setTimeout(() => setAdded(false), 1600);
   };
@@ -63,7 +74,7 @@ export default function DonationCard({ item }) {
       <div className="p-4 flex flex-col flex-1 gap-3">
         <div>
           <h3 className="font-bold text-gray-900 text-sm mb-0.5">{item.title}</h3>
-          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2">{item.description}</p>
+          <p className="text-gray-500 text-xs leading-relaxed line-clamp-2" dangerouslySetInnerHTML={{ __html: item.description }} />
         </div>
 
         {item.progressEnabled && <ProgressBar percent={item.progressPercent} />}

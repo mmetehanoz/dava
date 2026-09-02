@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { CheckCircle, ShoppingCart, ArrowLeft } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { donationItems } from '../data/donationItems';
+import { getDonationItems } from '../services/api';
 import DonationAmountSelector from '../components/donation/DonationAmountSelector';
 import QuantitySelector from '../components/donation/QuantitySelector';
 import IntentNoteField from '../components/donation/IntentNoteField';
@@ -20,7 +20,15 @@ export default function DonationDetailPage() {
   const navigate = useNavigate();
   const { addItem } = useCart();
 
-  const item = donationItems.find(i => i.slug === slug);
+  const [item, setItem] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    getDonationItems()
+      .then(items => { if (active) setItem(items.find(i => i.slug === slug) || null); })
+      .catch(() => { if (active) setItem(null); });
+    return () => { active = false; };
+  }, [slug]);
 
   const [quantity, setQuantity] = useState(1);
   const [selectedAmount, setSelectedAmount] = useState(item?.suggestedAmounts?.[0] || 0);

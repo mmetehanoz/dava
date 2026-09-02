@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { createDonation } from '../services/api';
+import { cartApi, paymentApi } from '../services/api';
 import PageHeader from '../components/ui/PageHeader';
 import TurnstileWidget from '../components/security/TurnstileWidget';
 
@@ -50,11 +50,57 @@ export default function DonorInfoPage() {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     try {
-      const result = await createDonation({ donor: form, items, totalAmount, turnstileToken });
-      if (result.success) {
-        clearCart();
-        navigate('/bagis-basarili', { state: { donationId: result.donationId, donor: form, totalAmount } });
+      // Prepare payload for server-side cart checkout
+      const contact_info = {
+        first_name: (form.fullName || '').split(/\s+/)[0] || '',
+        last_name: (form.fullName || '').split(/\s+/).slice(1).join(' ') || '',
+        email: form.email,
+        phone: form.phone,
+        city: form.city,
+        notes: form.note,
+      };
+
+      const payload = {
+        contact_info,
+        cf_turnstile_response: turnstileToken || undefined,
+      };
+
+      const resp = await cartApi.payforCheckout(payload);
+
+      // If gateway URL is returned, submit a form to the gateway (3D secure / host payment)
+      if (resp && resp.gateway_url) {
+        const formEl = document.createElement('form');
+        formEl.method = 'POST';
+        formEl.action = resp.gateway_url;
+        formEl.style.display = 'none';
+        const formData = resp.form_data || resp; // support different shapes
+        if (formData && typeof formData === 'object') {
+          Object.keys(formData).forEach((k) => {
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = k;
+            input.value = typeof formData[k] === 'object' ? JSON.stringify(formData[k]) : String(formData[k] ?? '');
+            formEl.appendChild(input);
+          });
+        }
+        document.body.appendChild(formEl);
+        formEl.submit();
+        return;
       }
+
+      // If redirect_url provided, navigate there
+      if (resp && resp.redirect_url) {
+        window.location.href = resp.redirect_url;
+        return;
+      }
+
+      // Fallback: if server returned order info, navigate to a pending page
+      if (resp && resp.order_id) {
+        navigate('/bagis-odeme-bekleniyor', { state: { orderId: resp.order_id } });
+        return;
+      }
+
+      throw new Error('Ödeme başlatılamadı');
     } catch {
       setErrors({ general: 'Bir hata oluştu, lütfen tekrar deneyin.' });
     } finally {

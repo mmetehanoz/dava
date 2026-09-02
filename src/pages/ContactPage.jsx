@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { contactApi } from '../services/api';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 
@@ -8,9 +9,22 @@ export default function ContactPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: '', email: '', subject: '', message: '' });
+    // submit to backend
+    contactApi.create({
+      name: form.name,
+      email: form.email,
+      phone: form.phone || '',
+      subject: form.subject,
+      message: form.message,
+    }).then(() => {
+      setSent(true);
+      setTimeout(() => setSent(false), 4000);
+      setForm({ name: '', email: '', subject: '', message: '' });
+    }).catch((err) => {
+      // show error briefly
+      console.error('Contact submit error', err);
+      alert((err && err.body && err.body.message) || 'Mesaj gönderilemedi');
+    });
   };
 
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));

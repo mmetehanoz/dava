@@ -1,3 +1,24 @@
+# Dava web + donation-system-api
+
+Dava, `donation-system-api` içinde `CLIENT_CODE=dava` ve `TENANT_ID=dava`
+ile çalışır. Dava tenant'ında kullanılan API modülleri şunlardır:
+
+| Modül | Kullanılan uç noktalar |
+| --- | --- |
+| Bağışlar | `/bagislar/kategoriler/`, `/bagislar/bagislar/`, `/bagislar/checkout/` |
+| Bağışçı | `/bagisci/profiles/` |
+| PDF | `/pdf/user-pdf/<uuid>/` |
+| Formlar | `/formlar/`, `/formlar/<slug>/`, `/formlar/<slug>/gonder/` |
+
+Frontend'i backend'e bağlamak için `dava/.env` içine backend kök adresini ekleyin:
+
+```env
+VITE_API_URL=http://localhost:8002
+```
+
+`VITE_API_URL` tanımlı değilken yalnızca bağış kataloğu, geliştirme kolaylığı için
+yerel örnek verilerle gösterilir. Bağış gönderimi gerçek API adresi olmadan yapılmaz.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.

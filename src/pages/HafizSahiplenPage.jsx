@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
 
@@ -17,6 +18,25 @@ const steps = [
 ];
 
 export default function HafizSahiplenPage() {
+  const [donation, setDonation] = useState(null);
+
+  useEffect(() => {
+    let active = true;
+    import('../services/api').then(mod => {
+      const { getDonationItems } = mod;
+      getDonationItems()
+        .then(items => {
+          if (!active) return;
+          let found = items.find(i => i.slug === 'hafiz-bursu');
+          if (!found) {
+            found = items.find(i => (i.slug && i.slug.toLowerCase().includes('hafiz')) || (i.title && i.title.toLowerCase().includes('hafiz')) || (i.title && i.title.toLowerCase().includes('hafız')));
+          }
+          setDonation(found || null);
+        })
+        .catch(() => {});
+    });
+    return () => { active = false; };
+  }, []);
   return (
     <div className="pb-20 lg:pb-0">
       <PageHeader
@@ -48,10 +68,10 @@ export default function HafizSahiplenPage() {
             </div>
             <div className="text-center">
               <div className="text-8xl mb-4">📖</div>
-              <div className="bg-white rounded-2xl p-4 shadow-md inline-block">
-                <div className="text-2xl font-bold text-emerald-700">1.000 ₺</div>
-                <div className="text-gray-500 text-sm">Aylık Burs</div>
-              </div>
+                <div className="bg-white rounded-2xl p-4 shadow-md inline-block">
+                  <div className="text-2xl font-bold text-emerald-700">{donation ? `${donation.fixedPrice || donation.suggestedAmounts?.[0] || 1000} ₺` : '1.000 ₺'}</div>
+                  <div className="text-gray-500 text-sm">Aylık Burs</div>
+                </div>
             </div>
           </div>
         </div>

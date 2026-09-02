@@ -1,16 +1,59 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageHeader from '../components/ui/PageHeader';
 import DonationCategoryTabs from '../components/donation/DonationCategoryTabs';
 import DonationCard from '../components/donation/DonationCard';
-import { donationCategories } from '../data/donationCategories';
-import { donationItems } from '../data/donationItems';
+import { donationCategories as fallbackCategories } from '../data/donationCategories';
+// fallback removed to prefer backend data; ensure dev server restarted to pick up VITE_API_URL
+import { getDonationCategories, getDonationItems } from '../services/api';
 
 export default function DonationPage() {
+  function slugifyLocal(value) {
+    if (!value && value !== 0) return '';
+    return String(value)
+      .toLowerCase()
+      .trim()
+      .replace(/ı/g, 'i')
+      .replace(/ğ/g, 'g')
+      .replace(/ü/g, 'u')
+      .replace(/ş/g, 's')
+      .replace(/ö/g, 'o')
+      .replace(/ç/g, 'c')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
+  }
   const [activeCategory, setActiveCategory] = useState('all');
+  const [categories, setCategories] = useState(fallbackCategories);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    Promise.all([getDonationCategories(), getDonationItems()])
+      .then(([apiCategories, apiItems]) => {
+        if (!active) return;
+        setCategories([
+          { id: 'all', label: 'Tümü', emoji: '🌟' },
+          ...apiCategories.map((category) => ({
+            id: category.id || (category.slug || category.name || category.label || '').toString(),
+            label: category.name || category.label || category.display_name || category.slug || 'Kategori',
+            emoji: category.emoji || '🤲',
+          })),
+        ]);
+        // ensure each item has categoryId (normalized in api.getDonationItems)
+        const mappedItems = apiItems.map(it => ({ ...it, categoryId: slugifyLocal(it.categoryId || it.category || '') }));
+        // debug to help trace why items/categories mismatch in UI
+        // eslint-disable-next-line no-console
+        console.debug('[donation-page] categories:', apiCategories, 'itemsSample:', mappedItems.slice(0,3));
+        setItems(mappedItems);
+      })
+      // API yapılandırılmadan arayüzün yerel katalogla çalışması amaçlıdır.
+      .catch(() => {});
+    return () => { active = false; };
+  }, []);
 
   const filtered = activeCategory === 'all'
-    ? donationItems
-    : donationItems.filter(i => i.category === activeCategory);
+    ? items
+    : items.filter(i => (i.categoryId || i.category) === activeCategory);
 
   return (
     <div className="pb-20 lg:pb-0">
@@ -25,7 +68,7 @@ export default function DonationPage() {
         {/* Category Filter */}
         <div className="mb-6">
           <DonationCategoryTabs
-            categories={donationCategories}
+            categories={categories}
             active={activeCategory}
             onChange={setActiveCategory}
           />
