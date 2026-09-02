@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { contactApi } from '../services/api';
 import { Phone, Mail, MapPin, Clock, Send } from 'lucide-react';
 import PageHeader from '../components/ui/PageHeader';
+import { useToast } from '../context/ToastContext';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+  const { notify } = useToast();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,15 +22,16 @@ export default function ContactPage() {
       setSent(true);
       setTimeout(() => setSent(false), 4000);
       setForm({ name: '', email: '', subject: '', message: '' });
+      notify.success('Mesaj Gönderildi', 'Mesajınız bize ulaştı. En kısa sürede geri dönüş yapacağız.');
     }).catch((err) => {
       // show error briefly
       console.error('Contact submit error', err);
       const detail = err && err.body && err.body.errors;
       if (detail) {
         const first = Array.isArray(detail) ? detail.join(', ') : Object.entries(detail).map(([k, v]) => `${k}: ${Array.isArray(v) ? v.join(', ') : v}`).join('; ');
-        alert(first || (err.body.message) || 'Mesaj gönderilemedi');
+        notify.error('Mesaj Gönderilemedi', first || (err.body.message) || 'Lütfen bilgilerinizi kontrol edin.');
       } else {
-        alert((err && err.body && err.body.message) || 'Mesaj gönderilemedi');
+        notify.error('Mesaj Gönderilemedi', (err && err.body && err.body.message) || 'Bir sorun oluştu, lütfen tekrar deneyin.');
       }
     });
   };

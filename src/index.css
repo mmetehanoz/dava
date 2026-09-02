@@ -55,3 +55,8 @@ body {
 .progress-bar-fill {
   animation: progressFill 1.2s ease-out forwards;
 }
+
+@keyframes slideInToast {
+  from { opacity: 0; transform: translateX(24px); }
+  to { opacity: 1; transform: translateX(0); }
+}

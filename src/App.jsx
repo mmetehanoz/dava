@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
+import { ToastProvider } from './context/ToastContext';
 import Navbar from './components/layout/Navbar';
 import MobileBottomNav from './components/layout/MobileBottomNav';
 import Footer from './components/layout/Footer';
@@ -41,29 +42,31 @@ export default function App() {
 
   return (
     <BrowserRouter basename={basename}>
-      <CartProvider>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Layout><HomePage /></Layout>} />
-          <Route path="/bagis" element={<Layout><DonationPage /></Layout>} />
-          <Route path="/bagis/:slug" element={<Layout><DonationDetailPage /></Layout>} />
-          <Route path="/sepet" element={<Layout><CartPage /></Layout>} />
-          <Route path="/bagisci-bilgileri" element={<Layout><DonorInfoPage /></Layout>} />
-          <Route path="/bagis-basarili" element={<Layout><DonationSuccessPage /></Layout>} />
-          <Route path="/odeme/basarili" element={<Layout><PaymentSuccessPage /></Layout>} />
-          <Route path="/odeme/basarisiz" element={<Layout><PaymentFailPage /></Layout>} />
-          <Route path="/hafiz-sahiplen" element={<Layout><HafizSahiplenPage /></Layout>} />
-          <Route path="/hafiz-bursu" element={<Layout><HafizBursuPage /></Layout>} />
-          <Route path="/kuran-kursu-insaati" element={<Layout><KuranKursuPage /></Layout>} />
-          <Route path="/faaliyetler" element={<Layout><ActivitiesPage /></Layout>} />
-          <Route path="/faaliyetler/:slug" element={<Layout><ActivityDetailPage /></Layout>} />
-          <Route path="/hakkimizda" element={<Layout><AboutPage /></Layout>} />
-          <Route path="/aileler-icin" element={<Layout><ForFamiliesPage /></Layout>} />
-          <Route path="/iletisim" element={<Layout><ContactPage /></Layout>} />
-          <Route path="/kurumlarimiz" element={<Layout><InstitutionsPage /></Layout>} />
-          <Route path="/kurumlarimiz/:slug" element={<Layout><InstitutionDetailPage /></Layout>} />
-        </Routes>
-      </CartProvider>
+      <ToastProvider>
+        <CartProvider>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Layout><HomePage /></Layout>} />
+            <Route path="/bagis" element={<Layout><DonationPage /></Layout>} />
+            <Route path="/bagis/:slug" element={<Layout><DonationDetailPage /></Layout>} />
+            <Route path="/sepet" element={<Layout><CartPage /></Layout>} />
+            <Route path="/bagisci-bilgileri" element={<Layout><DonorInfoPage /></Layout>} />
+            <Route path="/bagis-basarili" element={<Layout><DonationSuccessPage /></Layout>} />
+            <Route path="/odeme/basarili" element={<Layout><PaymentSuccessPage /></Layout>} />
+            <Route path="/odeme/basarisiz" element={<Layout><PaymentFailPage /></Layout>} />
+            <Route path="/hafiz-sahiplen" element={<Layout><HafizSahiplenPage /></Layout>} />
+            <Route path="/hafiz-bursu" element={<Layout><HafizBursuPage /></Layout>} />
+            <Route path="/kuran-kursu-insaati" element={<Layout><KuranKursuPage /></Layout>} />
+            <Route path="/faaliyetler" element={<Layout><ActivitiesPage /></Layout>} />
+            <Route path="/faaliyetler/:slug" element={<Layout><ActivityDetailPage /></Layout>} />
+            <Route path="/hakkimizda" element={<Layout><AboutPage /></Layout>} />
+            <Route path="/aileler-icin" element={<Layout><ForFamiliesPage /></Layout>} />
+            <Route path="/iletisim" element={<Layout><ContactPage /></Layout>} />
+            <Route path="/kurumlarimiz" element={<Layout><InstitutionsPage /></Layout>} />
+            <Route path="/kurumlarimiz/:slug" element={<Layout><InstitutionDetailPage /></Layout>} />
+          </Routes>
+        </CartProvider>
+      </ToastProvider>
     </BrowserRouter>
   );
 }

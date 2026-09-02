@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer, useEffect } from 'react';
 import { cartApi } from '../services/api';
+import { useToast } from './ToastContext';
 
 const CartContext = createContext(null);
 
@@ -67,6 +68,7 @@ function cartReducer(state, action) {
 
 export function CartProvider({ children }) {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+  const { notify } = useToast();
   useEffect(() => {
     let mounted = true;
     async function hydrate() {
@@ -213,12 +215,14 @@ export function CartProvider({ children }) {
           const items = Array.isArray(data.items) ? data.items : (data.results || data || []);
           dispatch({ type: 'HYDRATE', items });
         }
+        notify.cart('Sepete Eklendi', `${item.title || 'Bağış'} sepetinize eklendi.`);
         return;
       }
     } catch (err) {
       console.error('addItem API failed, falling back to local reducer', err);
     }
     dispatch({ type: 'ADD_ITEM', item });
+    notify.cart('Sepete Eklendi', `${item.title || 'Bağış'} sepetinize eklendi.`);
   };
 
   const removeItem = async (cartId) => {

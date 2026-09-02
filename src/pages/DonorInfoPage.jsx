@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, CheckCircle, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { cartApi, paymentApi } from '../services/api';
+import { useToast } from '../context/ToastContext';
 import PageHeader from '../components/ui/PageHeader';
 import TurnstileWidget from '../components/security/TurnstileWidget';
 
@@ -20,6 +21,7 @@ const Field = ({ label, id, error, children }) => (
 export default function DonorInfoPage() {
   const { items, totalAmount, clearCart } = useCart();
   const navigate = useNavigate();
+  const { notify } = useToast();
   const turnstileSiteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
   const [form, setForm] = useState({
@@ -103,6 +105,7 @@ export default function DonorInfoPage() {
       throw new Error('Ödeme başlatılamadı');
     } catch {
       setErrors({ general: 'Bir hata oluştu, lütfen tekrar deneyin.' });
+      notify.error('Ödeme Başlatılamadı', 'Bir hata oluştu, lütfen tekrar deneyin.');
     } finally {
       setLoading(false);
     }

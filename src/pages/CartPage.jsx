@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Trash2, Plus, Minus, ShoppingCart, ArrowRight } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { useToast } from '../context/ToastContext';
 import PageHeader from '../components/ui/PageHeader';
 
 const fmt = (n) =>
@@ -69,7 +70,13 @@ function CartItem({ item, onRemove, onQuantityChange }) {
 
 export default function CartPage() {
   const { items, totalAmount, removeItem, updateQuantity, clearCart } = useCart();
+  const { notify } = useToast();
   const navigate = useNavigate();
+
+  const handleClear = () => {
+    clearCart();
+    notify.info('Sepet Temizlendi', 'Tüm bağış kalemleri sepetinizden kaldırıldı.');
+  };
 
   if (items.length === 0) {
     return (
@@ -106,7 +113,7 @@ export default function CartPage() {
             <div className="flex items-center justify-between mb-2">
               <h2 className="font-bold text-gray-900">Bağış Kalemleri</h2>
               <button
-                onClick={clearCart}
+                onClick={handleClear}
                 className="text-xs text-red-400 hover:text-red-600 transition-colors font-medium"
               >
                 Sepeti Temizle
@@ -118,7 +125,7 @@ export default function CartPage() {
                 <CartItem
                   key={id}
                   item={item}
-                  onRemove={() => removeItem(id)}
+                  onRemove={() => { removeItem(id); notify.info('Bağış Kaldırıldı', `${item.title || 'Bağış'} sepetinizden çıkarıldı.`); }}
                   onQuantityChange={(qty) => updateQuantity(id, qty)}
                 />
               );
