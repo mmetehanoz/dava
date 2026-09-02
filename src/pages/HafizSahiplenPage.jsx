@@ -56,7 +56,7 @@ export default function HafizSahiplenPage() {
                 <span className="text-emerald-600">Bir Nesil Aydınlat</span>
               </h2>
               <p className="text-gray-600 leading-relaxed mb-6 text-sm md:text-base">
-                Aylık <strong className="text-emerald-700">1.000 TL</strong> bursunuzla bir hafız öğrencisinin eğitim yolculuğuna ortak olun.
+                Aylık <strong className="text-emerald-700">2.000 TL</strong> bursunuzla bir hafız öğrencisinin eğitim yolculuğuna ortak olun.
                 Hem dünya hem ahiret için yatırım yapın.
               </p>
               <Link
