@@ -5,7 +5,7 @@ export const donationItems = [
 		id: 1,
 		slug: 'hafiz-bursu',
 		image: assetPath('bagislar/hafiz-bursu.webp'),
-		title: 'Hafız Bursu',
+		title: 'Senin De Bir Hafızın Olsun',
 		category: 'Hafızlık',
 		description: "Bir hafız öğrencinin eğitim yolculuğuna destek olun. Aylık burs katkınızla bir çocuğun Kur'an eğitimi tamamlanır.",
 		emoji: '📖',

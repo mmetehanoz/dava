@@ -56,7 +56,7 @@ export default function ContactPage() {
             {[
               { Icon: MapPin, title: 'Adres', value: 'Maltepe Mah. Davutpaşa Cad. No:8/1\nZeytinburnu / İstanbul', href: null, color: 'bg-amber-50 text-amber-600' },
               { Icon: Phone, title: 'Telefon', value: '(0212) 493 34 34', href: 'tel:+902124933434', color: 'bg-emerald-50 text-emerald-600' },
-              { Icon: Phone, title: 'GSM', value: '(0554) 909 55 57', href: 'tel:+905549095557', color: 'bg-teal-50 text-teal-600' },
+              { Icon: Phone, title: 'GSM', value: '(0554) 909 55 57', href: 'tel:+905549095557', color: 'bg-emerald-50 text-emerald-600' },
               { Icon: Mail, title: 'E-posta', value: 'iletisim@degerveahlakvakfi.org', href: 'mailto:iletisim@degerveahlakvakfi.org', color: 'bg-blue-50 text-blue-600' },
             ].map(({ Icon, title, value, href, color }, i) => (
               <div key={i} className="bg-white rounded-3xl p-5 shadow-md border border-gray-100 flex items-start gap-4">

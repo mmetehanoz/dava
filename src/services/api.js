@@ -3,6 +3,19 @@ import { activities } from '../data/activities';
 import { socialLinks } from '../data/socialLinks';
 import { faqs } from '../data/faqs';
 import { stats } from '../data/stats';
+import { donationItems } from '../data/donationItems';
+import { donationCategories } from '../data/donationCategories';
+
+// Bazı bağışların görünen başlıklarını backend'den bağımsız güncellemek için
+const DISPLAY_OVERRIDES = {
+  'hafiz-bursu': { title: 'Senin De Bir Hafızın Olsun' },
+};
+
+function applyDisplayOverrides(item) {
+  const override = DISPLAY_OVERRIDES[item.slug];
+  if (!override) return item;
+  return { ...item, ...override };
+}
 
 // VITE_API_URL örneği: http://localhost:8002
 
@@ -133,14 +146,52 @@ export const getFaqs = async () => faqs;
 export const getStats = async () => stats;
 
 // --- Donation catalog helpers (used by DonationPage) ---
+const mapLocalCategories = () =>
+  donationCategories
+    .filter(c => c.id !== 'all')
+    .map(c => ({
+      id: slugify(c.id),
+      name: c.label || c.name || c.id,
+      slug: null,
+      emoji: c.emoji || '🤲',
+      raw: c,
+    }));
+
+const mapLocalItems = () =>
+  donationItems.map(i => ({
+    id: i.id,
+    slug: i.slug,
+    title: i.title,
+    description: i.description || '',
+    category: i.category || 'Genel Bağış',
+    categoryId: slugify(i.category || 'genel'),
+    emoji: i.emoji || '🤲',
+    image: i.image || null,
+    priceType: i.priceType || 'custom',
+    fixedPrice: i.fixedPrice || null,
+    minAmount: i.minAmount || 0,
+    suggestedAmounts: i.suggestedAmounts || [],
+    countries: i.countries || [],
+    quantityEnabled: i.quantityEnabled || false,
+    intentEnabled: i.intentEnabled || false,
+    countryEnabled: i.countryEnabled || false,
+    monthlyEnabled: i.monthlyEnabled || false,
+    progressEnabled: i.progressEnabled || false,
+    progressPercent: i.progressPercent || 0,
+    collectedAmount: i.collectedAmount || 0,
+    targetAmount: i.targetAmount || 0,
+  })).map(applyDisplayOverrides);
+
 export const getDonationCategories = async () => {
   try {
     const data = await donationsApi.getCategories();
     const raw = Array.isArray(data) ? data : (data && Array.isArray(data.results) ? data.results : []);
+    if (!raw.length) return mapLocalCategories();
     const mapped = raw.map(c => {
       const name = c.name || c.label || c.display_name || c.slug || '';
       return {
-        id: slugify(c.slug || c.id || name),
+        // Slug yokken adı kullan; böylece kategori id'si bağışların categoryId'siyle (ad slug'ı) eşleşir
+        id: slugify(c.slug || name || c.id),
         name,
         slug: c.slug || null,
         emoji: c.emoji || c.icon || mapNameToEmoji(name),
@@ -150,7 +201,7 @@ export const getDonationCategories = async () => {
     if (typeof window !== 'undefined') console.debug('[api] getDonationCategories -> count:', mapped.length, 'sample:', mapped[0] && mapped[0].id);
     return mapped;
   } catch (e) {
-    return [];
+    return mapLocalCategories();
   }
 };
 
@@ -159,6 +210,7 @@ export const getDonationItems = async (params = {}) => {
     const data = await donationsApi.listRaw(params);
     // normalize payload to frontend-friendly shape
     const rawItems = Array.isArray(data) ? data : (data && Array.isArray(data.results) ? data.results : []);
+    if (!rawItems.length) return mapLocalItems();
     const mapped = rawItems.map((i) => ({
       id: i.id,
       slug: i.slug,
@@ -185,14 +237,14 @@ export const getDonationItems = async (params = {}) => {
       progressPercent: i.share_progress || i.progress_percent || i.progressPercent || 0,
       collectedAmount: i.raised_amount || i.collectedAmount || 0,
       targetAmount: i.target_amount || i.targetAmount || 0,
-    }));
+    })).map(applyDisplayOverrides);
     if (typeof window !== 'undefined') {
       // eslint-disable-next-line no-console
       console.debug('[api] getDonationItems -> count:', mapped.length, 'sample:', mapped[0] && mapped[0].slug);
     }
     return mapped;
   } catch (e) {
-    return [];
+    return mapLocalItems();
   }
 };
 

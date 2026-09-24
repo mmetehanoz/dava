@@ -6,14 +6,14 @@ export default function HafizBursuPage() {
   return (
     <div className="pb-20 lg:pb-0">
       <PageHeader
-        title="Hafız Bursu"
+        title="Senin De Bir Hafızın Olsun"
         subtitle="Hafızlık eğitimi alan öğrencilere burs desteği sağlayın."
         emoji="🎓"
-        breadcrumb="Ana Sayfa / Hafız Bursu"
+        breadcrumb="Ana Sayfa / Senin De Bir Hafızın Olsun"
       />
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-10 text-center">
         <div className="text-7xl mb-6">🎓</div>
-        <h2 className="text-2xl font-bold text-gray-900 mb-4">Hafız Bursu Bağışı Yapın</h2>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Senin De Bir Hafızın Olsun</h2>
         <p className="text-gray-500 text-base max-w-xl mx-auto mb-8 leading-relaxed">
           Aylık 1.000 TL bursunuzla bir hafız öğrencisinin eğitim giderlerini karşılayın.
           Adet artırarak birden fazla öğrenciye destek olabilirsiniz.

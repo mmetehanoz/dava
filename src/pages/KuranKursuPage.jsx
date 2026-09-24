@@ -25,7 +25,7 @@ export default function KuranKursuPage() {
         breadcrumb="Ana Sayfa / Kur'an Kursu İnşaatı"
       />
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-10">
-        <div className="bg-gradient-to-br from-emerald-900 to-teal-800 rounded-3xl p-8 text-white mb-8">
+        <div className="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-3xl p-8 text-white mb-8">
           <div className="text-center mb-6">
             <div className="text-6xl mb-3">🏗️</div>
             <h2 className="text-2xl font-bold mb-2">İnşaat Durumu</h2>

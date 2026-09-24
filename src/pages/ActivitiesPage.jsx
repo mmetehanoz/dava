@@ -31,7 +31,7 @@ export default function ActivitiesPage() {
         ))}
 
         {/* Gönüllü Olma CTA */}
-        <div className="bg-gradient-to-br from-emerald-900 to-teal-800 rounded-3xl p-7 md:p-10 text-white shadow-xl mt-2">
+        <div className="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-3xl p-7 md:p-10 text-white shadow-xl mt-2">
           <div className="text-4xl mb-4">🙋‍♂️</div>
           <h2 className="text-xl md:text-2xl font-bold mb-3">Gönüllü Olmaya Davet</h2>
           <p className="text-emerald-200 text-sm leading-relaxed mb-3">

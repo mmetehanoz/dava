@@ -15,10 +15,10 @@ const styles = {
   },
   cart: {
     icon: ShoppingCart,
-    ring: 'border-teal-200',
-    iconBg: 'bg-teal-100',
-    iconColor: 'text-teal-600',
-    bar: 'bg-teal-500',
+    ring: 'border-emerald-200',
+    iconBg: 'bg-emerald-100',
+    iconColor: 'text-emerald-600',
+    bar: 'bg-emerald-500',
   },
   error: {
     icon: AlertCircle,

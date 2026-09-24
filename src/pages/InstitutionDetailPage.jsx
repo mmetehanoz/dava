@@ -43,7 +43,7 @@ export default function InstitutionDetailPage() {
           <div className="md:col-span-2 flex flex-col gap-5">
 
             {/* Kapak görseli */}
-            <div className="rounded-3xl h-56 overflow-hidden bg-gradient-to-br from-emerald-700 to-teal-700 flex items-center justify-center">
+            <div className="rounded-3xl h-56 overflow-hidden bg-gradient-to-br from-emerald-700 to-emerald-800 flex items-center justify-center">
               {inst.image ? (
                 <img src={inst.image} alt={inst.name} className="w-full h-full object-cover" />
               ) : (

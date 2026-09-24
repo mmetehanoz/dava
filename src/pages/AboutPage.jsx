@@ -367,7 +367,7 @@ export default function AboutPage() {
           onClick={() => setSenediOpen(true)}
           className="w-full bg-white rounded-3xl shadow-md border border-gray-100 p-5 flex items-center gap-4 hover:shadow-xl hover:border-emerald-200 transition-all duration-300 group text-left"
         >
-          <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-teal-700 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
+          <div className="w-12 h-12 bg-gradient-to-br from-emerald-600 to-emerald-800 rounded-2xl flex items-center justify-center shadow-md flex-shrink-0 group-hover:scale-105 transition-transform">
             <ScrollText className="w-6 h-6 text-white" />
           </div>
           <div className="flex-1">
@@ -445,7 +445,7 @@ export default function AboutPage() {
         {/* Çalışma Alanlarımız */}
         <section className="bg-white rounded-3xl shadow-md p-6 md:p-8 border border-gray-100">
           <div className="flex items-center gap-3 mb-6">
-            <div className="w-10 h-10 bg-teal-100 rounded-2xl flex items-center justify-center text-xl">🗂️</div>
+            <div className="w-10 h-10 bg-emerald-100 rounded-2xl flex items-center justify-center text-xl">🗂️</div>
             <h2 className="text-xl font-bold text-gray-900">Çalışma Alanlarımız</h2>
           </div>
           <div className="space-y-4">
@@ -488,8 +488,8 @@ export default function AboutPage() {
               {
                 num: 6,
                 title: "Sağlık, İnsan ve Çevre Bilinci",
-                color: "bg-teal-50 border-teal-100",
-                badge: "bg-teal-100 text-teal-700",
+                color: "bg-emerald-50 border-emerald-100",
+                badge: "bg-emerald-100 text-emerald-700",
                 text: "Hizmet sunduğumuz bölgelerde halkın sağlık, yaşam kalitesi ve çevre bilinci konularında bilinçlenmesi için programlar düzenliyor; ilgili kamu ve özel kurumlarla ortak projeler yürütüyoruz.",
               },
               {
@@ -526,7 +526,7 @@ export default function AboutPage() {
         </section>
 
         {/* Manifesto */}
-        <section className="bg-gradient-to-br from-emerald-900 to-teal-800 rounded-3xl p-6 md:p-10 text-white shadow-xl">
+        <section className="bg-gradient-to-br from-emerald-900 to-emerald-800 rounded-3xl p-6 md:p-10 text-white shadow-xl">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 bg-white/10 rounded-2xl flex items-center justify-center text-xl">✊</div>
             <h2 className="text-xl font-bold">Manifestomuz</h2>

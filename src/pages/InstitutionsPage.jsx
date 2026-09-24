@@ -25,7 +25,7 @@ export default function InstitutionsPage() {
           {institutions.map(inst => (
             <div key={inst.id} className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex flex-col group overflow-hidden">
               {/* Görsel alanı */}
-              <div className="bg-gradient-to-br from-emerald-700 to-teal-700 h-36 flex items-center justify-center relative overflow-hidden">
+              <div className="bg-gradient-to-br from-emerald-700 to-emerald-800 h-36 flex items-center justify-center relative overflow-hidden">
                 {inst.image ? (
                   <img src={inst.image} alt={inst.name} className="w-full h-full object-cover" />
                 ) : (

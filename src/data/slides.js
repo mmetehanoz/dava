@@ -16,7 +16,7 @@ export const slides = [
     cta: "Hemen Destek Ol",
     ctaLink: "/bagis/kuran-kursu-insaat-bagisi",
     badge: "%55 Tamamlandı",
-    bgColor: "from-emerald-800 to-teal-700",
+    bgColor: "from-emerald-800 to-emerald-950",
     emoji: "🏗️",
   },
 ];

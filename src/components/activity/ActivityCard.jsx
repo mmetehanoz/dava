@@ -9,7 +9,7 @@ const formatDate = (dateStr) => {
 export default function ActivityCard({ activity }) {
   return (
     <div className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 flex flex-col">
-      <div className="bg-gradient-to-br from-emerald-700 to-teal-700 h-28 flex items-center justify-center relative">
+      <div className="bg-gradient-to-br from-emerald-700 to-emerald-800 h-28 flex items-center justify-center relative">
         <div className="text-6xl group-hover:scale-110 transition-transform duration-300">
           {activity.emoji}
         </div>

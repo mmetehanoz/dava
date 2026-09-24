@@ -1,5 +1,19 @@
 @import "tailwindcss";
 
+@theme {
+  --color-emerald-50: #ecf8fb;
+  --color-emerald-100: #d4eef5;
+  --color-emerald-200: #a9ddeb;
+  --color-emerald-300: #72c5db;
+  --color-emerald-400: #47b2cc;
+  --color-emerald-500: #34afc3;
+  --color-emerald-600: #2b94ab;
+  --color-emerald-700: #267a90;
+  --color-emerald-800: #236373;
+  --color-emerald-900: #1f515f;
+  --color-emerald-950: #123039;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -43,7 +57,7 @@ body {
   background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #059669;
+  background: #2b94ab;
   border-radius: 3px;
 }
 
@@ -59,4 +73,17 @@ body {
 @keyframes slideInToast {
   from { opacity: 0; transform: translateX(24px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.marquee-paused:hover .animate-marquee {
+  animation-play-state: paused;
 }

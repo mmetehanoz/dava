@@ -63,7 +63,7 @@ export default function HomePage() {
               className="bg-white rounded-3xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 flex gap-4 p-4 group items-start"
             >
               {/* Görsel / emoji */}
-              <div className="w-16 h-16 flex-shrink-0 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-600 to-teal-700 flex items-center justify-center shadow-md">
+              <div className="w-16 h-16 flex-shrink-0 rounded-2xl overflow-hidden bg-gradient-to-br from-emerald-600 to-emerald-800 flex items-center justify-center shadow-md">
                 {inst.image
                   ? <img src={inst.image} alt={inst.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
                   : <span className="text-3xl group-hover:scale-110 transition-transform duration-300">{inst.emoji}</span>
@@ -102,7 +102,7 @@ export default function HomePage() {
       {/* Construction Campaign */}
       {constructionItem && (
         <section className="max-w-7xl mx-auto px-4 md:px-6 mt-10">
-          <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-teal-800 rounded-3xl p-6 md:p-10 text-white shadow-xl">
+          <div className="bg-gradient-to-br from-emerald-900 via-emerald-800 to-emerald-950 rounded-3xl p-6 md:p-10 text-white shadow-xl">
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <span className="inline-block bg-amber-400 text-amber-900 text-xs font-bold px-3 py-1 rounded-full mb-4">
