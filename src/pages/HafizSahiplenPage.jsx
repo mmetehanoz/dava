@@ -40,10 +40,10 @@ export default function HafizSahiplenPage() {
   return (
     <div className="pb-20 lg:pb-0">
       <PageHeader
-        title="Hafız Sahiplen"
+        title="Senin de Bir Hafızın Olsun"
         subtitle="Bir çocuğun hafızlık yolculuğuna destek olun. Hem eğitimine ortak olun hem duasını alın."
         emoji="📖"
-        breadcrumb="Ana Sayfa / Hafız Sahiplen"
+        breadcrumb="Ana Sayfa / Senin de Bir Hafızın Olsun"
       />
 
       <div className="max-w-4xl mx-auto px-4 md:px-6 py-10">
@@ -78,7 +78,7 @@ export default function HafizSahiplenPage() {
 
         {/* Benefits */}
         <section className="mb-10">
-          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">Hafız Sahiplenmenin Faydaları</h2>
+          <h2 className="text-xl font-bold text-gray-900 text-center mb-6">Senin de Bir Hafızının Olmasının Faydaları</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {benefits.map((b, i) => (
               <div key={i} className="bg-white rounded-3xl p-5 shadow-md border border-gray-100 text-center hover:shadow-lg transition-shadow">
@@ -129,7 +129,7 @@ export default function HafizSahiplenPage() {
         {/* CTA */}
         <div className="text-center bg-emerald-900 rounded-3xl p-8 text-white">
           <div className="text-5xl mb-4">🤲</div>
-          <h2 className="text-2xl font-bold mb-3">Bir Hafız Sahiplen</h2>
+          <h2 className="text-2xl font-bold mb-3">Senin de Bir Hafızın Olsun</h2>
           <p className="text-emerald-200 text-sm mb-6 max-w-md mx-auto">
             Aylık 1.000 TL ile bir çocuğun hafızlık eğitimini destekleyin. Bu yatırım, sizin için ebedi bir sadaka-i câriye olur.
           </p>

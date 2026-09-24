@@ -170,7 +170,7 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 gap-6 items-center">
             <div>
               <span className="text-4xl block mb-3">📖</span>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Bir Hafız Sahiplen</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-3">Senin de Bir Hafızın Olsun</h2>
               <p className="text-gray-600 text-sm md:text-base leading-relaxed mb-5">
                 Bir çocuğun hafızlık yolculuğuna destek olun. Aylık bursunuzla bir öğrencinin eğitimine ortak olun,
                 duasına nail olun. Her hafız, sizin için ebedi bir sadaka-i câriye olur.
@@ -179,7 +179,7 @@ export default function HomePage() {
                 to="/hafiz-sahiplen"
                 className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-6 py-3 rounded-2xl text-sm transition-all hover:shadow-md active:scale-95"
               >
-                Hafız Sahiplen <ArrowRight className="w-4 h-4" />
+                Senin de Bir Hafızın Olsun <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
             <div className="grid grid-cols-2 gap-3">

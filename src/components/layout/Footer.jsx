@@ -23,7 +23,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               {[
                 { to: '/bagis', label: 'Bağış Yap' },
-                { to: '/hafiz-sahiplen', label: 'Hafız Sahiplen' },
+                { to: '/hafiz-sahiplen', label: 'Senin de Bir Hafızın Olsun' },
                 { to: '/hafiz-bursu', label: 'Hafız Bursu' },
                 { to: '/kuran-kursu-insaati', label: 'Kur\'an Kursu İnşaatı' },
                 { to: '/faaliyetler', label: 'Faaliyetler' },
