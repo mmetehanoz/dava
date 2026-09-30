@@ -1,14 +1,16 @@
 import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, Shield } from 'lucide-react';
+import { ArrowLeft, CheckCircle, FlaskConical, Shield } from 'lucide-react';
 import { useCart } from '../context/CartContext';
-import { cartApi, paymentApi } from '../services/api';
+import { cartApi, testCheckout } from '../services/api';
 import { useToast } from '../context/ToastContext';
 import PageHeader from '../components/ui/PageHeader';
 import TurnstileWidget from '../components/security/TurnstileWidget';
 
 const fmt = (n) =>
   new Intl.NumberFormat('tr-TR', { style: 'currency', currency: 'TRY', maximumFractionDigits: 0 }).format(n);
+
+const isLocal = typeof window !== 'undefined' && (window.location.hostname.includes('localhost') || window.location.hostname.includes('127.0.0.1'));
 
 const Field = ({ label, id, error, children }) => (
   <div>
@@ -35,6 +37,7 @@ export default function DonorInfoPage() {
   const [turnstileToken, setTurnstileToken] = useState('');
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const [testMode, setTestMode] = useState(false);
 
   const validate = () => {
     const e = {};
@@ -42,7 +45,7 @@ export default function DonorInfoPage() {
     if (!form.phone.trim()) e.phone = 'Telefon zorunludur.';
     if (!form.email.trim() || !form.email.includes('@')) e.email = 'Geçerli bir e-posta girin.';
     if (!form.kvkk) e.kvkk = 'KVKK onayı zorunludur.';
-    if (turnstileSiteKey && !turnstileToken) e.turnstile = 'Güvenlik doğrulamasını tamamlayın.';
+    if (!testMode && turnstileSiteKey && !turnstileToken) e.turnstile = 'Güvenlik doğrulamasını tamamlayın.';
     return e;
   };
 
@@ -58,9 +61,39 @@ export default function DonorInfoPage() {
         last_name: (form.fullName || '').split(/\s+/).slice(1).join(' ') || '',
         email: form.email,
         phone: form.phone,
+        address: form.city || 'Belirtilmedi',
         city: form.city,
+        postal_code: '00000',
         notes: form.note,
       };
+
+      // Test ödemesi: ödeme adımını atla, siparişi sunucuda tamamlanmış işaretle
+      if (testMode) {
+        const testItems = items.map((item) => ({
+          donation_id: item.id ?? item.donation_id,
+          price: item.priceType === 'fixed' ? item.fixedPrice : item.amount,
+          quantity: item.quantity || 1,
+          name: item.title || item.name || '',
+          type: item.type || 'donation',
+        }));
+
+        const resp = await testCheckout({
+          items: testItems,
+          contact_info,
+          payment_method: 'test_skip',
+          payment_source: 'dava_web',
+          cf_turnstile_response: turnstileToken || 'LOCAL_TEST_TOKEN',
+        });
+
+        if (resp && resp.success) {
+          await clearCart();
+          notify.success('Ödeme Tamamlandı', resp.message || 'Test ödemesi başarıyla tamamlandı.');
+          navigate('/odeme/basarili', { state: { orderId: resp.order_id, orderNumber: resp.order_number } });
+        } else {
+          throw new Error(resp?.error || 'Test ödemesi başlatılamadı');
+        }
+        return;
+      }
 
       const payload = {
         contact_info,
@@ -210,6 +243,21 @@ export default function DonorInfoPage() {
               error={errors.turnstile}
             />
 
+            {isLocal ? (
+              <label className="flex items-center gap-2.5 rounded-2xl border-2 border-dashed border-orange-300 bg-orange-50 px-4 py-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={testMode}
+                  onChange={(ev) => setTestMode(ev.target.checked)}
+                  className="w-4 h-4 text-orange-500 rounded accent-orange-500"
+                />
+                <span className="text-xs text-orange-700 leading-relaxed">
+                  <FlaskConical className="inline w-4 h-4 mr-1 align-[-2px]" />
+                  <strong>Test ödemesi</strong> — ödeme adımını atlar, bağış tamamlanmış sayılır (yalnızca geliştirme ortamı)
+                </span>
+              </label>
+            ) : null}
+
             <button
               type="submit"
               disabled={loading}
@@ -223,6 +271,8 @@ export default function DonorInfoPage() {
                   </svg>
                   İşleniyor...
                 </span>
+              ) : testMode ? (
+                <><FlaskConical className="w-5 h-5" /> Test Ödemesini Tamamla</>
               ) : (
                 <><CheckCircle className="w-5 h-5" /> Bağışı Tamamla</>
               )}

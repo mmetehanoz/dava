@@ -307,6 +307,9 @@ export const paymentApi = {
   donationsCheckout: (payload) => request('/bagislar/checkout/', { method: 'POST', body: payload }),
 };
 
+// TEST: Ödeme adımını atla (sadece DEBUG modunda çalışır)
+export const testCheckout = (payload) => request('/bagislar/test-checkout-odeme-atla/', { method: 'POST', body: payload });
+
 // --- Donor API ---
 export const donorApi = {
   getProfile: (id) => request(`/bagisci/profiles/${encodeURIComponent(id)}/`),
